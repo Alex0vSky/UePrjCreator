@@ -16,8 +16,6 @@ jobs:
       - name: Set environment values (windows-latest)
         run: | 
           $dirBin='${{github.workspace}}\bin';
-          $dirExecutables_x86="$dirBin\x86\Release";
-          echo "dirExecutables_x86=$dirExecutables_x86" >> $env:GITHUB_ENV
           $dirExecutables_x64="$dirBin\x64\Release";
           echo "dirExecutables_x64=$dirExecutables_x64" >> $env:GITHUB_ENV
           echo "dirBin=$dirBin" >> $env:GITHUB_ENV
@@ -57,18 +55,15 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
       - name: Build release
         run: | # build from *.sln
-          MSBuild . -noLogo -verbosity:minimal -m -p:Platform=x86 -p:Configuration=Release
           MSBuild . -noLogo -verbosity:minimal -m -p:Platform=x64 -p:Configuration=Release
       - uses: actions/upload-artifact@v3
         with:
           name: artifact-build-release-all
           path: |
-            ${{env.dirExecutables_x86}}\*.exe
             ${{env.dirExecutables_x64}}\*.exe
 
       - name: Renaming to versioning names
         run: | 
-          mv -v ${{env.dirExecutables_x86}}\${{env.strExe}}.exe ${{runner.temp}}\${{env.strExe}}-${{ env.strTag }}-x86.exe
           mv -v ${{env.dirExecutables_x64}}\${{env.strExe}}.exe ${{runner.temp}}\${{env.strExe}}-${{ env.strTag }}-x64.exe
       - name: Replace '\\' for softprops/action-gh-release
         run: | 
