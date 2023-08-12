@@ -52,6 +52,7 @@
 
 #pragma warning( push )
 #pragma warning( disable: 4005 )
+#pragma warning( disable: 4244 )
 
 // Changeable Unreal Engine header location
 #define A0S_UE C:/Ue
