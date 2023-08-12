@@ -1,0 +1,86 @@
+name: Build and creating release
+on: { workflow_dispatch, push: { paths-ignore: [ 'README.md' ] } }
+# Configuration
+env:
+  strExe: UePrjCreator
+  uriGistId: b36ca1e6aa246bf06f1abcbea5b2c009
+  strPatchVersionBase: 0
+jobs:
+  build-release:
+    runs-on: windows-latest
+    permissions:
+      contents: write # read for "actions/checkout@v3" when GITHUB_TOKEN, write for put in release
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set environment values (windows-latest)
+        run: | 
+          $dirBin='${{github.workspace}}\bin';
+          $dirExecutables_x86="$dirBin\x86\Release";
+          echo "dirExecutables_x86=$dirExecutables_x86" >> $env:GITHUB_ENV
+          $dirExecutables_x64="$dirBin\x64\Release";
+          echo "dirExecutables_x64=$dirExecutables_x64" >> $env:GITHUB_ENV
+          echo "dirBin=$dirBin" >> $env:GITHUB_ENV
+          $uriVersion='gist.githubusercontent.com/${{ github.repository_owner }}/${{ env.uriGistId }}/raw'
+          echo "uriVersion=$uriVersion" >> $env:GITHUB_ENV
+
+      - name: Get version values
+        run: | 
+          $strVersionMajor=$(curl.exe https://${{ env.uriVersion }}/VersionMajor.txt);
+          $strVersionMinor=$(curl.exe https://${{ env.uriVersion }}/VersionMinor.txt);
+          $strVersionPatch=$(curl.exe https://${{ env.uriVersion }}/VersionPatch.txt);
+          echo "strVersionMajor=$strVersionMajor" >> $env:GITHUB_ENV
+          echo "strVersionMinor=$strVersionMinor" >> $env:GITHUB_ENV
+          echo "strVersionPatch=$strVersionPatch" >> $env:GITHUB_ENV
+          $strVersionBuild=( [int]${{ env.strPatchVersionBase }} + [int]${{ github.run_number }} )
+          echo "strVersionBuild=$strVersionBuild" >> $env:GITHUB_ENV
+
+      - name: Set version
+        run: | 
+          $ffnVersion='src\Version.h'
+          $env:strText=[System.IO.File]::ReadAllText( $ffnVersion );
+          Function defineReplacer_ ( $name, $value ) {
+              $env:strText=[Regex]::Replace( $env:strText, "(#define\s+$name\s+)\d+", ( '${1}' + $value ) );
+          }
+          defineReplacer_ 'A0S_VERSION_MAJOR' ${{ env.strVersionMajor }}
+          defineReplacer_ 'A0S_VERSION_MINOR' ${{ env.strVersionMinor }}
+          defineReplacer_ 'A0S_VERSION_PATCH' ${{ env.strVersionPatch }}
+          defineReplacer_ 'A0S_VERSION_BUILD' ${{ env.strVersionBuild }}
+          [System.IO.File]::WriteAllText( $ffnVersion, $env:strText )
+          $strMajorMinor='${{ env.strVersionMajor }}.${{ env.strVersionMinor }}';
+          echo "strTag=$strMajorMinor" >> $env:GITHUB_ENV
+          echo "strVTag=v$strMajorMinor" >> $env:GITHUB_ENV
+          $strSemver="$strMajorMinor.${{ env.strVersionPatch }}.${{ env.strVersionBuild }}";
+          echo "strSemver=$strSemver" >> $env:GITHUB_ENV
+          
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build release
+        run: | # build from *.sln
+          MSBuild . -noLogo -verbosity:minimal -m -p:Platform=x86 -p:Configuration=Release
+          MSBuild . -noLogo -verbosity:minimal -m -p:Platform=x64 -p:Configuration=Release
+      - uses: actions/upload-artifact@v3
+        with:
+          name: artifact-build-release-all
+          path: |
+            ${{env.dirExecutables_x86}}\*.exe
+            ${{env.dirExecutables_x64}}\*.exe
+
+      - name: Renaming to versioning names
+        run: | 
+          mv -v ${{env.dirExecutables_x86}}\${{env.strExe}}.exe ${{runner.temp}}\${{env.strExe}}-${{ env.strTag }}-x86.exe
+          mv -v ${{env.dirExecutables_x64}}\${{env.strExe}}.exe ${{runner.temp}}\${{env.strExe}}-${{ env.strTag }}-x64.exe
+      - name: Replace '\\' for softprops/action-gh-release
+        run: | 
+          $strGlob="${{runner.temp}}/${{env.strExe}}-${{ env.strTag }}-*.exe";
+          $strGlob = $strGlob -replace '\\','/';
+          echo "strGlob=$strGlob" >> $env:GITHUB_ENV
+
+      # Warning: only this '/' slashes!
+      - name: Creating GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.strVTag }}
+          fail_on_unmatched_files: true
+          body: Version ${{ env.strSemver }}
+          files: ${{ env.strGlob }}
