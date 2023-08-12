@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="_ForIntelliSense">
+      <UniqueIdentifier>{379c259f-4b7a-40e8-a8dc-dbffd5b1c2ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ForIntelliSense\sysw">
+      <UniqueIdentifier>{315e303f-2577-4468-b01a-92657051d415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ForIntelliSense\ue">
+      <UniqueIdentifier>{c033f9d5-606a-4888-bbc0-2554b0b3ddde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_pch">
+      <UniqueIdentifier>{cfc98628-3c30-49e6-aeba-dff24ecace1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ForIntelliSense\ue\strings">
+      <UniqueIdentifier>{2891a305-64c1-44d8-b59b-68ffafe1b5c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ForIntelliSense\ue\string">
+      <UniqueIdentifier>{9a9967cb-2c26-4f92-bf7c-b3ffa03b4872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_ForIntelliSense\ue\COMPILED_PLATFORM_HEADER">
+      <UniqueIdentifier>{5e70f0d2-c4b1-4472-99b5-03194aa12081}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Misc\CommandLine.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Misc\ConfigCacheIni.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\CoreMinimal.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Misc\CoreDelegates.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Editor\GameProjectGeneration\Public\GameProjectUtils.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Editor\HardwareTargeting\Public\HardwareTargetingSettings.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Modules\ModuleManager.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\ApplicationCore\Public\HAL\PlatformApplicationMisc.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\HAL\PlatformOutputDevices.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\ApplicationCore\Public\Windows\WindowsPlatformApplicationMisc.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\Windows.h">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Misc\OutputDeviceHelper.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\winerror.h">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\wtypes.h">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CmdLiner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FOutputDeviceStdOutput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Registry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DelayloadStaticVar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UeLocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\argparse.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\magic_enum.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_pch\stdafx.h">
+      <Filter>_pch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\GenericPlatform\GenericPlatformString.h">
+      <Filter>_ForIntelliSense\ue\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\HAL\PlatformString.h">
+      <Filter>_ForIntelliSense\ue\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Windows\WindowsPlatformString.h">
+      <Filter>_ForIntelliSense\ue\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Misc\CString.h">
+      <Filter>_ForIntelliSense\ue\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Containers\StringConv.h">
+      <Filter>_ForIntelliSense\ue\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StringConvert.h">
+      <Filter>_ForIntelliSense\ue\strings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\Containers\UnrealString.h">
+      <Filter>_ForIntelliSense\ue\string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\Core\Public\HAL\PreprocessorHelpers.h">
+      <Filter>_ForIntelliSense\ue\COMPILED_PLATFORM_HEADER</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\CoreUObject\Public\UObject\Class.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Editor\GameProjectGeneration\Classes\TemplateProjectDefs.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Ue\Engine\Source\Runtime\CoreUObject\Public\UObject\UObjectBase.h">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DevTpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FileSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource\UePrjCreator.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\Ue\cpp.hint" />
+    <None Include="..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\optional">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\string">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </None>
+    <None Include="..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\vector">
+      <Filter>_ForIntelliSense\sysw</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\_pch\stdafx.cpp">
+      <Filter>_pch</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EntryPoint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Ue\Engine\Source\Editor\GameProjectGeneration\Private\GameProjectUtils.cpp">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Ue\Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectHash.cpp">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Ue\Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectGlobals.cpp">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Ue\Engine\Source\Runtime\CoreUObject\Private\UObject\Obj.cpp">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Ue\Engine\Source\Runtime\CoreUObject\Private\UObject\UObjectBase.cpp">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Ue\Engine\Source\Editor\AddContentDialog\Private\ContentSourceProviders\FeaturePack\FeaturePackContentSource.cpp">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameProjectGeneration\ClassTemplateEditorSubsystem.gen.cpp">
+      <Filter>_ForIntelliSense\ue</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\..\..\..\..\..\Program Files\Epic Games\UE_4.26\Engine\Extras\VisualStudioDebugging\UE4.natvis" />
+  </ItemGroup>
+</Project>
