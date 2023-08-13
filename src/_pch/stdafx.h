@@ -54,7 +54,7 @@
 #pragma warning( disable: 4005 )
 #pragma warning( disable: 4244 )
 
-// Changeable Unreal Engine header location
+// Changeable Unreal Engine header location. Yes, only this slash '/'. One line for batch processing
 #define A0S_UE C:/Ue
 #define A0S_STRINGIZE_(x) #x
 #define A0S_STR(x) A0S_STRINGIZE_(x)

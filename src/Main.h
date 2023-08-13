@@ -46,6 +46,7 @@ static int run(int argc, wchar_t *argv[]) {
 			UPC_LOG( L"Error! Cant write to system temporary directory" );
 			return ERROR_INVALID_ACCESS;
 		}
+		UPC_TRACE( "Please, use -OverrideBuildEnvironment argument for UBT" );
 		TemplateFullFilename = devTpl.getFullFilename( );
 	}
 
