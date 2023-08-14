@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7525745a-4bb2-4dc9-8004-ba37d62f5e72}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\x64\$(Configuration)\</OutDir>
+    <IntDir>bin\x64\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\x64\$(Configuration)\</OutDir>
+    <IntDir>bin\x64\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="testMain.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="testUeLocator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StaticLibrary\StaticLibrary.vcxproj">
+      <Project>{2bf72a32-bcaf-4b1b-9851-e54d6ecf7132}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\pchMain.h" />
+    <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemDefinitionGroup />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>..\ThirdParty\googletest\gmock\include;..\ThirdParty\gmock-win32\include; ..\..\..\resource;..\..\..;..\..\..\src; ..\..\..\src\_pch; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem;..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine;..\..\..\include\Engine\Source\Runtime\Engine\Public;..\..\..\include\Engine\Source\Editor\EditorSubsystem\Public; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameProjectGeneration;..\..\..\include\Engine\Source;..\..\..\include\Engine\Source\Editor\AddContentDialog\Public; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AddContentDialog; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore;..\..\..\include\Engine\Source\Runtime\SlateCore\Public;..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InputCore;..\..\..\include\Engine\Source\Runtime\InputCore\Classes;  ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HardwareTargeting;..\..\..\include\Engine\Source\Runtime\Core\Public;..\..\..\include\Engine\Source\Runtime\ApplicationCore\Public;..\..\..\include\Engine\Source\Editor\HardwareTargeting\Public;..\..\..\include\Engine\Source\Runtime\Json\Public;..\..\..\include\Engine\Source\Runtime\Projects\Public;..\..\..\include\Engine\Source\Runtime\CoreUObject\Public;..\..\..\include\Engine\Source\Runtime\Slate\Public;..\..\..\include\Engine\Source\Runtime\TraceLog\Public; %(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalOptions>
+Delayimp.lib
+/delayload:UE4Editor-Core.dll
+/delayload:UE4Editor-ApplicationCore.dll
+/delayload:UE4Editor-GameProjectGeneration.dll
+/delayload:UE4Editor-CoreUObject.dll
+/delayload:UE4Editor-AddContentDialog.dll
+/delayload:UE4Editor-Slate.dll
+..\..\..\lib\UE4Editor-Core.lib
+..\..\..\lib\UE4Editor-ApplicationCore.lib
+..\..\..\lib\UE4Editor-GameProjectGeneration.lib
+..\..\..\lib\UE4Editor-CoreUObject.lib
+..\..\..\lib\UE4Editor-AddContentDialog.lib
+..\..\..\lib\UE4Editor-Slate.lib
+ %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\ThirdParty\googletest\gmock\include;..\ThirdParty\gmock-win32\include; ..\..\..\resource;..\..\..;..\..\..\src; ..\..\..\src\_pch; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem;..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine;..\..\..\include\Engine\Source\Runtime\Engine\Public;..\..\..\include\Engine\Source\Editor\EditorSubsystem\Public; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameProjectGeneration;..\..\..\include\Engine\Source;..\..\..\include\Engine\Source\Editor\AddContentDialog\Public; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AddContentDialog; ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore;..\..\..\include\Engine\Source\Runtime\SlateCore\Public;..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InputCore;..\..\..\include\Engine\Source\Runtime\InputCore\Classes;  ..\..\..\include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HardwareTargeting;..\..\..\include\Engine\Source\Runtime\Core\Public;..\..\..\include\Engine\Source\Runtime\ApplicationCore\Public;..\..\..\include\Engine\Source\Editor\HardwareTargeting\Public;..\..\..\include\Engine\Source\Runtime\Json\Public;..\..\..\include\Engine\Source\Runtime\Projects\Public;..\..\..\include\Engine\Source\Runtime\CoreUObject\Public;..\..\..\include\Engine\Source\Runtime\Slate\Public;..\..\..\include\Engine\Source\Runtime\TraceLog\Public; %(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <AdditionalOptions>
+Delayimp.lib
+/delayload:UE4Editor-Core.dll
+/delayload:UE4Editor-ApplicationCore.dll
+/delayload:UE4Editor-GameProjectGeneration.dll
+/delayload:UE4Editor-CoreUObject.dll
+/delayload:UE4Editor-AddContentDialog.dll
+/delayload:UE4Editor-Slate.dll
+..\..\..\lib\UE4Editor-Core.lib
+..\..\..\lib\UE4Editor-ApplicationCore.lib
+..\..\..\lib\UE4Editor-GameProjectGeneration.lib
+..\..\..\lib\UE4Editor-CoreUObject.lib
+..\..\..\lib\UE4Editor-AddContentDialog.lib
+..\..\..\lib\UE4Editor-Slate.lib
+ %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+</Project>

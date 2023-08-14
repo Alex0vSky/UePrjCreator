@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\ThirdParty\googletest\gmock\src\gmock\src\gmock_main.cc">
+      <Filter>gmock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\googletest\gmock\src\gmock\gmock-all.cc">
+      <Filter>gmock</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParty\googletest\gmock\src\gtest\gtest-all.cc">
+      <Filter>googletest</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="googletest">
+      <UniqueIdentifier>{2ba63289-0bcf-432f-8c62-98455b714706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gmock">
+      <UniqueIdentifier>{84b5c6bb-4209-49d1-8f67-0afd8573c97f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+</Project>
