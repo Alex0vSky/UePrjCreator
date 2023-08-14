@@ -17,6 +17,7 @@ jobs:
 
       - name: Set values (windows-latest)
         run: | 
+          echo "dirSetupCppcheck=${env:Programfiles}\cppcheck" >> $env:GITHUB_ENV
           $strCommitHashMetrixpp=(git ls-remote https://github.com/metrixplusplus/metrixplusplus HEAD).split()[0]
           echo "strCommitHashMetrixpp=$strCommitHashMetrixpp" >> $env:GITHUB_ENV
 
