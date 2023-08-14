@@ -3,17 +3,17 @@
 https://en.wikipedia.org/wiki/C++
 ) [![Run tests, then collect result and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/TestsResultAndCoverage.yml/badge.svg)](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/TestsResultAndCoverage.yml)
 
-[![cpplint](https://gist.githubusercontent.com/Alex0vSky/2af621bdd237231125e907ea81b1f8a8/raw/GoogleStyle_cpplint.svg)](
+[![cpplint](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/GoogleStyle_cpplint.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/cpplint.xml
-) [![cppcheck](https://gist.githubusercontent.com/Alex0vSky/2af621bdd237231125e907ea81b1f8a8/raw/StaticAnalysis_cppcheck.svg)](
+) [![cppcheck](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/StaticAnalysis_cppcheck.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/cppcheck.xml
-) [![LinesOfСode](https://gist.githubusercontent.com/Alex0vSky/2af621bdd237231125e907ea81b1f8a8/raw/Metrixpp-LinesOfСode.svg)](
+) [![LinesOfСode](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/Metrixpp-LinesOfСode.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/metrixpp.txt
-) [![Comments](https://gist.githubusercontent.com/Alex0vSky/2af621bdd237231125e907ea81b1f8a8/raw/Metrixpp-Comments.svg)](
+) [![Comments](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/Metrixpp-Comments.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/metrixpp.txt
-) [![amount testsuites](https://gist.githubusercontent.com/Alex0vSky/2af621bdd237231125e907ea81b1f8a8/raw/GoogleTest-testsuites-Windows-x86-Debug.svg)](
-https://Alex0vSky.github.io/project-qa-report/UePrjCreator/GoogleTestCombinedOutput/GoogleTestCombinedOutput.html
-) [![tests coverage](https://gist.githubusercontent.com/Alex0vSky/2af621bdd237231125e907ea81b1f8a8/raw/TestsCoverage-Occ-Windows-x86-Debug.svg)](
+) [![amount testsuites](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/GoogleTest-testsuites-Windows-x86-Debug.svg)](
+https://Alex0vSky.github.io/project-qa-report/UePrjCreator/GoogleTestCombinedOutput/index.html
+) [![tests coverage](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/TestsCoverage-Occ-Windows-x86-Debug.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/HtmlReportOcc/index.html
 )
 
@@ -22,7 +22,6 @@ The resulting directory containing the *.uproject file is ready to be embedded i
 The tool contains a template for building an executable file without creating *Editor.dll library.
 SEO Using Unreal Engine from command line.
 SEO Unreal Engine command line tool.
-touch
 
 ## Features
 
