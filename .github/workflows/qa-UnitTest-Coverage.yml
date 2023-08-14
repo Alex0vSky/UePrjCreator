@@ -1,0 +1,196 @@
+name: Qa test and coverage
+on: [ workflow_dispatch ]
+# Configuration
+env:
+  strPlatform: x64 # or x86
+  strConfiguration: Debug # or Release
+  strNameOccSetupFile: OpenCppCoverageSetup-x86-0.9.9.0.exe
+  strGhTagOccSetupFile: release-0.9.9.0 # from https://github.com/OpenCppCoverage/OpenCppCoverage/tags
+  strOccExecutable: OpenCppCoverage.exe
+  strOccHtmlReport: HtmlReportOcc
+  strCoberturaReport: CoberturaReportOcc.xml
+  strMergedXmlToHtml: GoogleTestCombinedOutput
+  relGtestOutput: GtestOutput
+  module0: GTest1.exe
+  test_artifact_name: artifact-build-test
+  qa_artifact_name: current-project-qa-report
+  uriGistId: c200bc8d7e3cc3a79b61351963b2d390
+jobs:
+  test-and-coverage:
+    runs-on: windows-latest
+    permissions:
+      actions: read # for "dawidd6/action-download-artifact@v2"
+      contents: read # for "actions/checkout@v3" when GITHUB_TOKEN
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set values (windows-latest)
+        run: | # build from *.sln, all tests
+          echo "dirTestExecutables=${{github.workspace}}\qa\UnitTest\bin\${{env.strPlatform}}\${{env.strConfiguration}}" >> $env:GITHUB_ENV
+          echo "strCfg=${{env.strPlatform}}-${{env.strConfiguration}}" >> $env:GITHUB_ENV
+          echo "dirSetupOcc=${env:Programfiles}\Occ" >> $env:GITHUB_ENV
+
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build-test.yml
+          name: ${{ env.test_artifact_name }}
+          path: ${{ env.dirTestExecutables }}
+          search_artifacts: true
+
+      - name: Cache tool Occ
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.dirSetupOcc }}
+          key: cache-key-tool-occ-${{ env.strNameOccSetupFile }}
+        id: cache-tool-occ
+      - name: Download tool Occ
+        if: steps.cache-tool-occ.outputs.cache-hit != 'true'
+        uses: robinraju/release-downloader@v1.8
+        with:
+          repository: OpenCppCoverage/OpenCppCoverage
+          fileName: ${{ env.strNameOccSetupFile }}
+          tag: ${{ env.strGhTagOccSetupFile }}
+      - name: Install tool Occ
+        if: steps.cache-tool-occ.outputs.cache-hit != 'true'
+        run: |
+          $arglist="/VERYSILENT /SUPPRESSMSGBOXES /DIR=""${{ env.dirSetupOcc }}"" /LOG=""${{ runner.temp }}\${{ env.strNameOccSetupFile }}.log"""
+          Start-Process "${{ env.strNameOccSetupFile }}" -ArgumentList $arglist -Wait 
+          #type "${{ runner.temp }}\${{ env.strNameOccSetupFile }}.log"
+
+      - name: Run tool Occ
+        continue-on-error: true
+        run: | # double launching because windows system hooks from AppCompat conflicts with gmock-win32 hooks
+          # Warmup for gmock-win32 hooks
+          @( 
+              "${{ env.module0 }}"
+          ).ForEach{ Start-Process "${{ env.dirTestExecutables }}\$_" -ArgumentList '--gtest_repeat=0' -NoNewWindow; } 
+          
+          # Prepare occ args
+          $common_args='-q --working_dir "src"'
+          $modules="--modules ${{ env.dirTestExecutables }}"
+          $sep = ' --excluded_sources '; $excluded_sources = $sep + ( '"{0}"' -f ( @( 
+            'src\Main.h'
+            , 'ThirdParty\*'
+            , 'include\Engine\*'
+            , 'src\_pch\*'
+            , 'qa\UnitTest'
+            , 'D:\a\_work'
+            , 'C:\Program Files'
+          ) -join '"'+$sep+'"') );
+          $excluded_line_regex='--excluded_line_regex .*@NOCOVERAGE.*'
+          
+          # Foreach module execute occ
+          Function runnerOcc_ ( $arg_program ) {
+            $export_type="--export_type binary:${{ runner.temp }}\${arg_program}.cov"
+            $program_to_run="${{ env.dirTestExecutables }}\$arg_program --gtest_brief=1 --gtest_output=xml:${{ runner.temp }}\${{ env.relGtestOutput }}\$arg_program.xml"
+            Start-Process -Wait -NoNewWindow "${{ env.dirSetupOcc }}\${{ env.strOccExecutable }}" -ArgumentList "$common_args $modules $excluded_sources $excluded_line_regex $export_type -- $program_to_run"
+          }          
+          runnerOcc_ ${{ env.module0 }}
+          
+          # Change html template
+          $ffnOccTemplate="${{ env.dirSetupOcc }}\Template\MainTemplate.html"
+          (Get-Content $ffnOccTemplate).replace('{{TITLE}}', 'Merged from all tests') | Set-Content $ffnOccTemplate
+          
+          # Merge
+          $export_type="--export_type html:${{ runner.temp }}\${{ env.strOccHtmlReport }} --export_type cobertura:${{ runner.temp }}\${{ env.strCoberturaReport }}"
+          $sep = " --input_coverage ${{ runner.temp }}"; 
+          $input_coverage = $sep + ( @(
+              "\${{ env.module0 }}.cov"
+          ) -join $sep );
+          Start-Process -Wait -NoNewWindow "${{ env.dirSetupOcc }}\${{ env.strOccExecutable }}" -ArgumentList "$input_coverage $export_type" 
+          
+          [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\${{ env.strCoberturaReport }};
+          $oSystem_Xml_XmlElement = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'coverage' ).Item( 0 );
+          $uLinesCovered = $oSystem_Xml_XmlElement.GetAttribute( 'lines-covered' );
+          $uLinesValid = $oSystem_Xml_XmlElement.GetAttribute( 'lines-valid' );
+          $dCoveredPercent = ( 100 * ( $uLinesCovered / $uLinesValid ) );
+          $strCoveredPercent = [math]::Round( $dCoveredPercent, 2 );
+          echo "strCoverageValue=$strCoveredPercent" >> $env:GITHUB_ENV
+      - name: Generate *.svg file for badge TestsCoverage if success
+        if: ${{ success( ) }}
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: Tests coverage
+          status: ${{ env.strCoverageValue }}%
+          color: ${{ false
+            || env.strCoverageValue > 90 && 'green'
+            || env.strCoverageValue > 80 && 'yellow,green'
+            || env.strCoverageValue > 70 && 'yellow'
+            || env.strCoverageValue > 60 && 'orange,yellow'
+            || env.strCoverageValue > 50 && 'orange'
+            || env.strCoverageValue > 40 && 'red,orange'
+            || env.strCoverageValue > 30 && 'red,red,orange'
+            || env.strCoverageValue > 20 && 'red,red,red,orange'
+            || 'red' }}
+          path: TestsCoverage-Occ-${{ runner.os }}-${{ env.strCfg }}.svg
+      # env-s not pass between steps when failure
+      - name: Generate *.svg file for badge TestsCoverage if failure
+        if: ${{ failure( ) }}
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: Tests coverage
+          status: failing
+          color: red
+          path: TestsCoverage-Occ-${{ runner.os }}-${{ env.strCfg }}.svg
+      - name: Put *.svg file to Gists for badge TestsCoverage
+        if: ${{ success( ) || failure( ) }} # yes, not 'always( )' because 'cancelled( )'
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.ACCESS_TO_GIST }}
+          gist_id: ${{ env.uriGistId }}
+          file_path: TestsCoverage-Occ-${{ runner.os }}-${{ env.strCfg }}.svg
+
+      - name: Install xml merger
+        run: pip install junitparser
+      - name: Merge xml reports
+        run: junitparser merge --suite-name AllTests --glob "${{ runner.temp }}\${{ env.relGtestOutput }}\*.xml" "${{ env.strCfg }}.xml"
+      - name: Install gtest xml to html converter
+        run: git clone https://github.com/Alex0vSky/gtest_report
+      - name: Convert xml to html
+        working-directory: ./gtest_report # directory html_resources must be in current dir
+        run: |
+          py scripts\genHtmlReportFromGtest.py "out\index.html" "..\${{ env.strCfg }}.xml"
+          mv -v "out" ${{ runner.temp }}\${{ env.strMergedXmlToHtml }}
+          [xml]$oSystem_Xml_XmlDocument = Get-Content ..\${{ env.strCfg }}.xml
+          $oSystem_Xml_XmlElement = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'testsuites' ).Item( 0 );
+          $uTests = $oSystem_Xml_XmlElement.GetAttribute( 'tests' );
+          echo "uTests=$uTests" >> $env:GITHUB_ENV
+      - name: Generate *.svg file for badge GoogleTest
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: GoogleTest
+          status: ${{ env.uTests }} testsuites
+          path: GoogleTest-testsuites-${{ runner.os }}-${{ env.strCfg }}.svg
+      - name: Put *.svg file to Gists for badge GoogleTest
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.ACCESS_TO_GIST }}
+          gist_id: ${{ env.uriGistId }}
+          file_path: GoogleTest-testsuites-${{ runner.os }}-${{ env.strCfg }}.svg
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.qa_artifact_name }}
+          path: |
+            ${{ runner.temp }}\${{ env.strOccHtmlReport }}
+            ${{ runner.temp }}\${{ env.strMergedXmlToHtml }}
+            ${{ runner.temp }}\${{ env.strCoberturaReport }}
+
+      - name: Parse current workflow filename (windows-latest)
+        run: | 
+          $strMagicPath = "/.github/workflows/";
+          $strRepo = "${{ github.repository }}";
+          $strRef = "${{ github.ref }}";
+          $strWorkflowFilename = "${{ github.workflow_ref }}";
+          $strWorkflowFilename = $strWorkflowFilename.Remove( 0, ( $strRepo + $strMagicPath ).Length );
+          $strWorkflowFilename = $strWorkflowFilename.Replace( ( '@' + $strRef ), '' );
+          echo "strWorkflowFilename=$strWorkflowFilename" >> $env:GITHUB_ENV
+      - name: Publish to GitHubPages
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.ACCESS_TO_PUBLIC_REPO }}
+          repository: Alex0vSky/project-qa-report
+          event-type: a0s_event_public_pages
+          client-payload: '{"project": "${{ github.event.repository.name }}", "repo": "${{ github.repository }}", "workflow": "${{env.strWorkflowFilename}}", "artifact": "${{env.qa_artifact_name}}"}'
