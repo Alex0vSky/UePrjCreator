@@ -1,0 +1,230 @@
+name: Qa staticAnalysis and codeMetrics
+on: { workflow_dispatch, push: { paths-ignore: [ '**', '!.github/workflows/qa-StaticAnalysis-CodeMetrics.yml' ] } }
+# Configuration
+env:
+  strNameCppcheckSetupFile: cppcheck-2.11-x64-Setup.msi
+  strGhTagCppcheckSetupFile: 2.11 # from https://github.com/danmar/cppcheck/releases/tag/
+  qa_artifact_name: artifact-qa-StaticAnalysis_CodeMetrics
+  uriGistId: c200bc8d7e3cc3a79b61351963b2d390
+jobs:
+  test-and-coverage:
+    runs-on: windows-latest
+    permissions:
+      actions: read # for "dawidd6/action-download-artifact@v2"
+      contents: read # for "actions/checkout@v3" when GITHUB_TOKEN
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set values (windows-latest)
+        run: | 
+          $strCommitHashMetrixpp=(git ls-remote https://github.com/metrixplusplus/metrixplusplus HEAD).split()[0]
+          echo "strCommitHashMetrixpp=$strCommitHashMetrixpp" >> $env:GITHUB_ENV
+
+      - name: Cache metrics
+        uses: actions/cache@v3
+        with:
+          path: metrixplusplus_master
+          key: cache-key-tool-metrics-${{ env.strCommitHashMetrixpp }}
+        id: cache-tool-metrics
+
+      - name: Install metrics
+        if: steps.cache-tool-metrics.outputs.cache-hit != 'true'
+        run: git clone https://github.com/metrixplusplus/metrixplusplus metrixplusplus_master
+      - name: Run metrics
+        run: |
+          "Version metrixpp/metrix++/metrixplusplus from 'git show --summary': [" > ${{ runner.temp }}\metrixpp.txt
+          (git --git-dir metrixplusplus_master\.git show --summary) >> ${{ runner.temp }}\metrixpp.txt
+          "]" >> ${{ runner.temp }}\metrixpp.txt
+          Function metrix++() { py 'metrixplusplus_master\metrix++.py' @args }
+          metrix++ collect --log-level=ERROR --std.code.lines.code --std.code.lines.comments --std.code.complexity.cyclomatic --db-file=${{ runner.temp }}\metrixpp.db -- ${{github.workspace}}\src
+          metrix++ view --log-level=ERROR --db-file=${{ runner.temp }}\metrixpp.db -- ${{github.workspace}}\src >> ${{ runner.temp }}\metrixpp.txt
+          metrix++ view --log-level=ERROR --format=xml --db-file=${{ runner.temp }}\metrixpp.db -- ${{github.workspace}}\src > ${{ runner.temp }}\metrixpp.xml
+          
+          [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\metrixpp.xml
+          $uLocTotalCode = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'std.code.lines' ).GetElementsByTagName( 'code' ).GetAttribute( 'total' );
+          $uLocTotalComments = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'std.code.lines' ).GetElementsByTagName( 'comments' ).GetAttribute( 'total' );
+          $child = $oSystem_Xml_XmlDocument.CreateElement( 'Version' )
+          $child.InnerText = $strVersionMetrixpp;
+          $oSystem_Xml_XmlDocument.DocumentElement.AppendChild( $child );
+          $oSystem_Xml_XmlDocument.Save( "${{ runner.temp }}\metrixpp.xml" )
+          $uLocTotalCode = [math]::Round( $uLocTotalCode, 0 );
+          $uLocTotalComments = [math]::Round( $uLocTotalComments, 0 );
+          echo "metrixpp_uLocTotalCode=$uLocTotalCode" >> $env:GITHUB_ENV
+          echo "metrixpp_uLocTotalComments=$uLocTotalComments" >> $env:GITHUB_ENV
+      - name: Generate *.svg file for badge LinesOfСode
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: LinesOfСode
+          status: ${{env.metrixpp_uLocTotalCode}}
+          color: a9a9a9 # darkgrey=a9a9a9, lightgrey=d3d3d3
+          path: Metrixpp-LinesOfСode.svg
+      - name: Put *.svg file to Gists for badge LinesOfСode
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.ACCESS_TO_GIST }}
+          gist_id: ${{ env.uriGistId }}
+          file_path: Metrixpp-LinesOfСode.svg
+      - name: Generate *.svg file for badge Comments
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: Comments
+          status: ${{env.metrixpp_uLocTotalComments}}
+          color: a9a9a9 # darkgrey=a9a9a9, lightgrey=d3d3d3
+          path: Metrixpp-Comments.svg
+      - name: Put *.svg file to Gists for badge Comments
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.ACCESS_TO_GIST }}
+          gist_id: ${{ env.uriGistId }}
+          file_path: Metrixpp-Comments.svg
+
+      - name: Install GoogleStyle cpplint
+        run: pip install cpplint
+      - name: Run GoogleStyle cpplint
+        id: RunToolGoogleStyleCpplint
+        continue-on-error: true # when cpplint return error
+        run: | 
+          $strVersionCpplint=(pip show cpplint |findstr Version) -replace 'Version: ',''
+          $arrFilter = @(
+            'whitespace/tab',
+            'whitespace/end_of_line',
+            'whitespace/parens',
+            'readability/namespace',
+            'whitespace/comments'
+          );
+          $filter = '-' + ( $arrFilter -join ',-' );
+          $linelength=120
+          $cpplint_args="--linelength=$linelength --filter=$filter --exclude=src\MsvcGenerated\* --exclude=src\Legacy\* --recursive --output=junit src";
+          Start-Process -Wait -NoNewWindow cpplint -ArgumentList $cpplint_args -RedirectStandardError ${{ runner.temp }}\cpplint.xml
+          [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\cpplint.xml
+          $cpplint_failures = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'testsuite' ).GetAttribute( 'failures' );
+          $child = $oSystem_Xml_XmlDocument.CreateElement( 'Arguments' )
+          $child.InnerText = $cpplint_args;
+          $oSystem_Xml_XmlDocument.DocumentElement.AppendChild( $child );
+          $child = $oSystem_Xml_XmlDocument.CreateElement( 'Version' )
+          $child.InnerText = $strVersionCpplint;
+          $oSystem_Xml_XmlDocument.DocumentElement.AppendChild( $child );
+          $oSystem_Xml_XmlDocument.Save( "${{ runner.temp }}\cpplint.xml" )
+          echo "cpplint_failures=$cpplint_failures" >> $env:GITHUB_ENV
+          echo "cpplint_arrFilter_Count=$($arrFilter.Count)" >> $env:GITHUB_ENV
+          echo "cpplint_linelength=$linelength" >> $env:GITHUB_ENV
+      - name: Generate *.svg file for badge GoogleStyle cpplint if success
+        if: steps.RunToolGoogleStyleCpplint.outcome == 'success' && env.cpplint_failures == '0'
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: cpplint
+          status: ${{env.cpplint_arrFilter_Count}} filters, linelength=${{env.cpplint_linelength}}
+          path: GoogleStyle_cpplint.svg
+      - name: Generate *.svg file for badge GoogleStyle cpplint if failure
+        if: env.cpplint_failures > 0 || env.cpplint_failures == ''
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: cpplint
+          status: failing
+          color: red
+          path: GoogleStyle_cpplint.svg
+      - name: Put *.svg file to Gists for badge GoogleStyle cpplint
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.ACCESS_TO_GIST }}
+          gist_id: ${{ env.uriGistId }}
+          file_path: GoogleStyle_cpplint.svg
+
+      - name: Cache tool cppcheck
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.dirSetupCppcheck }}
+          key: cache-key-tool-cppcheck-${{ env.strNameCppcheckSetupFile }}
+        id: cache-tool-cppcheck
+      - name: Download tool cppcheck
+        if: steps.cache-tool-cppcheck.outputs.cache-hit != 'true'
+        uses: robinraju/release-downloader@v1.8
+        with:
+          repository: danmar/cppcheck
+          fileName: ${{ env.strNameCppcheckSetupFile }}
+          tag: ${{ env.strGhTagCppcheckSetupFile }}
+      - name: Install tool cppcheck
+        if: steps.cache-tool-cppcheck.outputs.cache-hit != 'true'
+        run: |
+          $arglist = "/i ""${{ github.workspace }}\${{ env.strNameCppcheckSetupFile }}"" INSTALLDIR=""${{ env.dirSetupCppcheck }}"" TARGETDIR=""${{ env.dirSetupCppcheck }}"" ALLUSERS=2 MSIINSTALLPERUSER=1 /quiet /norestart /log ""${{ runner.temp }}\${{ env.strNameCppcheckSetupFile }}.log"" "
+          $uWait_seconds = 120;
+          $ps = new-object System.Diagnostics.Process; $ps.StartInfo.UseShellExecute = $false; $ps.StartInfo.WorkingDirectory = Get-Location;
+          $ps.StartInfo.Filename = "msiexec"
+          $ps.StartInfo.Arguments = $arglist
+          $uWait_milliseconds = $uWait_seconds *1000;
+          $ps.start( ); $ps.WaitForExit( $uWait_milliseconds );
+          "type log"
+          type "${{ runner.temp }}\${{ env.strNameCppcheckSetupFile }}.log"
+      - name: Run tool cppcheck
+        id: RunToolCppcheck
+        continue-on-error: true
+        run: | 
+          $common = ' --std=c++17 --platform=win32A --library=microsoft_sal --library=windows --enable=all -q --xml ';
+          $include = '';
+          $include += ' -I "resource"'
+          $include += ' -I "src"'
+          $include += ' -I "ThirdParty\SynCOMAPIv1_0\Include"'
+          $defines  = ''
+          $defines += ' -DDECLSPEC_IMPORT=__declspec(import)'
+          $defines += ' -D_X86_=1'
+          $defines += ' -D_M_HYBRID_X86_ARM64=1'
+          $suppress = ' --suppress=missingIncludeSystem --suppress=missingInclude:*\SynCtrl.h --suppress=preprocessorErrorDirective:*\SynCtrl.h'
+          $cppcheck_exe = "${{env.dirSetupCppcheck}}\cppcheck.exe"
+          $cppcheck_args = $common + $include + $defines + $suppress + ' ' + 'src';
+          Start-Process -Wait -NoNewWindow $cppcheck_exe -ArgumentList $cppcheck_args -RedirectStandardError ${{ runner.temp }}\cppcheck.xml
+          
+          [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\cppcheck.xml
+          $uCountError = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'results' ).GetElementsByTagName( 'errors' ).GetElementsByTagName( 'error' ).Count;
+          [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\cppcheck.xml
+          $child = $oSystem_Xml_XmlDocument.CreateElement( 'Arguments' )
+          $child.InnerText = $cppcheck_args;
+          $oSystem_Xml_XmlDocument.DocumentElement.AppendChild( $child );
+          $oSystem_Xml_XmlDocument.Save( "${{ runner.temp }}\cppcheck.xml" )
+          echo "cppcheck_uCountError=$uCountError" >> $env:GITHUB_ENV
+      - name: Generate *.svg file for badge cppcheck if success
+        if: steps.RunToolCppcheck.outcome == 'success' && env.cppcheck_uCountError == '0'
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: cppcheck
+          status: enable=all
+          color: green
+          path: StaticAnalysis_cppcheck.svg
+      - name: Generate *.svg file for badge cppcheck if failure
+        if: env.cppcheck_uCountError > 0 || env.cppcheck_uCountError == ''
+        uses: emibcn/badge-action@v2.0.2
+        with:
+          label: cppcheck
+          status: ${{env.cppcheck_uCountError}} errors
+          color: red
+          path: StaticAnalysis_cppcheck.svg
+      - name: Put *.svg file to Gists for badge cppcheck
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.ACCESS_TO_GIST }}
+          gist_id: ${{ env.uriGistId }}
+          file_path: StaticAnalysis_cppcheck.svg
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.qa_artifact_name }}
+          path: |
+            ${{ runner.temp }}\metrixpp.txt
+            ${{ runner.temp }}\cpplint.xml
+            ${{ runner.temp }}\cppcheck.xml
+
+      - name: Parse current workflow filename (windows-latest)
+        run: | 
+          $strMagicPath = "/.github/workflows/";
+          $strRepo = "${{ github.repository }}";
+          $strRef = "${{ github.ref }}";
+          $strWorkflowFilename = "${{ github.workflow_ref }}";
+          $strWorkflowFilename = $strWorkflowFilename.Remove( 0, ( $strRepo + $strMagicPath ).Length );
+          $strWorkflowFilename = $strWorkflowFilename.Replace( ( '@' + $strRef ), '' );
+          echo "strWorkflowFilename=$strWorkflowFilename" >> $env:GITHUB_ENV
+      - name: Publish to GitHubPages
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.ACCESS_TO_PUBLIC_REPO }}
+          repository: Alex0vSky/project-qa-report
+          event-type: a0s_event_public_pages
+          client-payload: '{"project": "${{ github.event.repository.name }}", "repo": "${{ github.repository }}", "workflow": "${{env.strWorkflowFilename}}", "artifact": "${{env.qa_artifact_name}}"}'
