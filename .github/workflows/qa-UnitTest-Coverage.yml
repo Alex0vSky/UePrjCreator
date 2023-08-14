@@ -166,6 +166,8 @@ jobs:
           status: ${{ env.uTests }} testsuites
           path: GoogleTest-testsuites-${{ runner.os }}-${{ env.strCfg }}.svg
       - name: Put *.svg file to Gists for badge GoogleTest
+# TMP!!!
+        continue-on-error: true
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.ACCESS_TO_GIST }}
