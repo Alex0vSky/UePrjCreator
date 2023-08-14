@@ -1,4 +1,4 @@
-# [<img alt="icon1" style="margin-bottom: -5px" src=https://github.com/Alex0vSky/UePrjCreator/assets/52796897/ba4cfb9b-0568-4221-a64d-4eba135c9bca>]() _UePrjCreator_
+# _UePrjCreator_
 [![cpp-logo](https://img.shields.io/badge/C++v17-Solutions-blue.svg?style=flat&logo=c%2B%2B)](
 https://en.wikipedia.org/wiki/C++
 ) [![Run tests, then collect result and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/TestsResultAndCoverage.yml/badge.svg)](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/TestsResultAndCoverage.yml)
