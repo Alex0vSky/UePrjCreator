@@ -1,11 +1,12 @@
 // src\UeLocator.h - locate installation Unreal Engine
 #pragma once // Copyright 2023 Alex0vSky (https://github.com/Alex0vSky)
 namespace prj_3d { namespace UePrjCreator {
+template< class T = Reg >
 struct UeLocator {
 	// Well known registy location
 	static std::map< std::wstring, std::wstring > getAllVersionToPath( ) {
 		std::map< std::wstring, std::wstring > VerToPath;
-		auto RegEnumerate = Reg::createEnumerate( Constants::getUnrealEngineRegistryKey( ) );
+		auto RegEnumerate = T::createEnumerate( Constants::getUnrealEngineRegistryKey( ) );
 		if ( RegEnumerate ) {
 			auto container = RegEnumerate ->all( );
 			for (auto &var : container) {

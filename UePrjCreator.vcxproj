@@ -176,7 +176,10 @@ lib\UE4Editor-Slate.lib
     <ClInclude Include="src\StringConvert.h" />
     <ClInclude Include="src\UeLocator.h" />
     <ClInclude Include="src\Version.h" />
+    <ClInclude Include="src\_fromBatch\_pch\stdafx.h" />
+    <ClInclude Include="src\_pch\argparse.h" />
     <ClInclude Include="src\_pch\stdafx.h" />
+    <ClInclude Include="src\_pch\sysw.h" />
     <ClInclude Include="ThirdParty\argparse.hpp" />
     <ClInclude Include="ThirdParty\magic_enum.hpp" />
   </ItemGroup>

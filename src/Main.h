@@ -51,7 +51,7 @@ static int run(int argc, wchar_t *argv[]) {
 	}
 
 	if ( UeInstallDir.empty( ) ) {
-		int exitCode = UeLocator::getPreferedDirectory( UeVersion, UeInstallDir );
+		int exitCode = UeLocator< >::getPreferedDirectory( UeVersion, UeInstallDir );
 		if ( ERROR_SUCCESS != exitCode )
 			return exitCode;
 	}

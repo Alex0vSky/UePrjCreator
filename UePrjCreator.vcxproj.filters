@@ -34,6 +34,9 @@
     <Filter Include="_ForIntelliSense\ue\COMPILED_PLATFORM_HEADER">
       <UniqueIdentifier>{5e70f0d2-c4b1-4472-99b5-03194aa12081}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_pch\_fromBatch">
+      <UniqueIdentifier>{7fabe2db-2bdb-4d04-84c9-a74946897687}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource\resource.h">
@@ -158,6 +161,15 @@
     </ClInclude>
     <ClInclude Include="src\FileSystem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_pch\sysw.h">
+      <Filter>_pch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_fromBatch\_pch\stdafx.h">
+      <Filter>_pch\_fromBatch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_pch\argparse.h">
+      <Filter>_pch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
