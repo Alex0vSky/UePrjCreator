@@ -7,7 +7,7 @@ env:
   qa_artifact_name: artifact-qa-StaticAnalysis_CodeMetrics
   uriGistId: c200bc8d7e3cc3a79b61351963b2d390
 jobs:
-  test-and-coverage:
+  staticAnalysis-and-codeMetrics:
     runs-on: windows-latest
     permissions:
       actions: read # for "dawidd6/action-download-artifact@v2"
@@ -78,6 +78,11 @@ jobs:
           token: ${{ secrets.ACCESS_TO_GIST }}
           gist_id: ${{ env.uriGistId }}
           file_path: Metrixpp-Comments.svg
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+          cache: 'pip'
 
       - name: Install GoogleStyle cpplint
         run: pip install cpplint
