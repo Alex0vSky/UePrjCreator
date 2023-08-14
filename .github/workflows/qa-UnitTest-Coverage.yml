@@ -61,7 +61,7 @@ jobs:
 
       - name: Run tool Occ
         continue-on-error: true
-        run: | # double launching because windows system hooks from AppCompat conflicts with gmock-win32 hooks
+        run: |
           # Warmup for gmock-win32 hooks
           @( 
               "${{ env.module0 }}"
@@ -136,8 +136,6 @@ jobs:
           path: TestsCoverage-Occ-${{ runner.os }}-${{ env.strCfg }}.svg
       - name: Put *.svg file to Gists for badge TestsCoverage
         if: ${{ success( ) || failure( ) }} # yes, not 'always( )' because 'cancelled( )'
-# TMP!!!
-        continue-on-error: true
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.ACCESS_TO_GIST }}
@@ -166,8 +164,6 @@ jobs:
           status: ${{ env.uTests }} testsuites
           path: GoogleTest-testsuites-${{ runner.os }}-${{ env.strCfg }}.svg
       - name: Put *.svg file to Gists for badge GoogleTest
-# TMP!!!
-        continue-on-error: true
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.ACCESS_TO_GIST }}
