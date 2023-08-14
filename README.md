@@ -1,7 +1,7 @@
 # _UePrjCreator_
 [![cpp-logo](https://img.shields.io/badge/C++v17-Solutions-blue.svg?style=flat&logo=c%2B%2B)](
 https://en.wikipedia.org/wiki/C++
-) [![Run tests, then collect result and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/TestsResultAndCoverage.yml/badge.svg)](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/TestsResultAndCoverage.yml)
+) [![Qa test and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml/badge.svg)](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml)
 
 [![cpplint](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/GoogleStyle_cpplint.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/cpplint.xml
@@ -11,9 +11,9 @@ https://Alex0vSky.github.io/project-qa-report/UePrjCreator/cppcheck.xml
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/metrixpp.txt
 ) [![Comments](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/Metrixpp-Comments.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/metrixpp.txt
-) [![amount testsuites](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/GoogleTest-testsuites-Windows-x86-Debug.svg)](
+) [![amount testsuites](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/GoogleTest-testsuites-Windows-x64-Debug.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/GoogleTestCombinedOutput/index.html
-) [![tests coverage](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/TestsCoverage-Occ-Windows-x86-Debug.svg)](
+) [![tests coverage](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/TestsCoverage-Occ-Windows-x64-Debug.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/HtmlReportOcc/index.html
 )
 
