@@ -54,8 +54,7 @@ static int run(int argc, wchar_t *argv[]) {
 		int exitCode = UeLocator< >::getPreferedDirectory( UeVersion, UeInstallDir );
 		if ( ERROR_SUCCESS != exitCode )
 			return exitCode;
-	}
-	else {
+	} else {
 		UPC_TRACE( L"Try load selected path of Unreal Engine: \n  [%s]", UeInstallDir.c_str( ) );
 	}
 	UeInstallDir += LR"(\Engine\Binaries\Win64)";
