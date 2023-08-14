@@ -1,0 +1,27 @@
+name: Build tests GoogleTest (Debug-x64)
+on: { workflow_dispatch, push: { paths-ignore: [ '**', '!qa/**', '!.github/workflows/build-test.yml' ] } }
+# Configuration
+env:
+  strPlatform: x64 # or x86
+  strConfiguration: Debug # or Release
+  test_artifact_name: artifact-build-test
+jobs:
+  build-tests-gtest:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3          
+      - name: Set values (windows-latest)
+        run: | # build from *.sln, all tests
+          echo "dirTestExecutables=${{github.workspace}}\qa\UnitTest\bin\${{env.strPlatform}}\${{env.strConfiguration}}" >> $env:GITHUB_ENV
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+      - name: Build tests
+        run: MSBuild qa/UnitTest/UnitTest.sln -noLogo -verbosity:quiet -m -p:Platform=${env:strPlatform} -p:Configuration=${env:strConfiguration} 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.test_artifact_name }}
+          path: | # *.pdb for code coverage
+            ${{env.dirTestExecutables}}\*.exe
+            ${{env.dirTestExecutables}}\*.pdb
+            !${{env.dirTestExecutables}}\StaticLibrary.pdb
