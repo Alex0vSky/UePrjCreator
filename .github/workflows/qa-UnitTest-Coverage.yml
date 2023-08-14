@@ -1,10 +1,10 @@
 name: Qa test and coverage
-on: [ workflow_dispatch ]
+on: { workflow_dispatch, push: { paths-ignore: [ '**', '!.github/workflows/qa-UnitTest-Coverage.yml' ] } }
 # Configuration
 env:
   strPlatform: x64 # or x86
+  strNameOccSetupFile: OpenCppCoverageSetup-x64-0.9.9.0.exe
   strConfiguration: Debug # or Release
-  strNameOccSetupFile: OpenCppCoverageSetup-x86-0.9.9.0.exe
   strGhTagOccSetupFile: release-0.9.9.0 # from https://github.com/OpenCppCoverage/OpenCppCoverage/tags
   strOccExecutable: OpenCppCoverage.exe
   strOccHtmlReport: HtmlReportOcc
