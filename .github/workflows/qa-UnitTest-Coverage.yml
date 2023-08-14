@@ -136,6 +136,8 @@ jobs:
           path: TestsCoverage-Occ-${{ runner.os }}-${{ env.strCfg }}.svg
       - name: Put *.svg file to Gists for badge TestsCoverage
         if: ${{ success( ) || failure( ) }} # yes, not 'always( )' because 'cancelled( )'
+# TMP!!!
+        continue-on-error: true
         uses: exuanbo/actions-deploy-gist@v1
         with:
           token: ${{ secrets.ACCESS_TO_GIST }}
