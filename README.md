@@ -22,6 +22,7 @@ The resulting directory containing the *.uproject file is ready to be embedded i
 The tool contains a template for building an executable file without creating *Editor.dll library.
 SEO Using Unreal Engine from command line.
 SEO Unreal Engine command line tool.
+touch
 
 ## Features
 
