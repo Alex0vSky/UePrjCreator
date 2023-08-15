@@ -37,28 +37,19 @@ The tool consists of one file. Does not require installation.
 ## Usage
 For the term _UnrealEngine_, the abbreviation _Ue_ will be used below.
 
-First set desired full file name for *.uproject location
-> `set ffnUprj=C:\Prj\Ue\FromUePrjCreator\FromUePrjCreator.uproject`
+First set desired full file name for *.uproject location. For example it will be `C:\UePrj1\UePrj1.uproject`
 
-Generate a standart blank project
-Simple run for higher/major installed _Ue_ version
->`UePrjCreator.exe %ffnUprj%`
-
-Run for certain installed _Ue_ version
-
-`UePrjCreator.exe %ffnUprj% --UeVersion=4.26`
-
-Run for installed _Ue_ in certain path in quotes
-
-`UePrjCreator.exe %ffnUprj% --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"`
-
-Generate single exe game, without *Engine.dll/%yourProjectName%Engine.dll, for certain installed _Ue_ version
-
-`UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --DevTpl`
-
-Generate from exists template by path in quotes, for certain installed _Ue_ version
-
-`UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"`
+1. Generate a standart blank project
+- Easy start for the latest version of the installed _Ue_:
+>`UePrjCreator.exe "C:\UePrj1\UePrj1.uproject"`
+- Run for a specific installed version of the _Ue_:
+>`UePrjCreator.exe "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26`
+- Run for installed _Ue_ in certain path in quotes:
+>`UePrjCreator.exe "C:\UePrj1\UePrj1.uproject" --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"`
+2. Generate from an existing template with a quoted path for a specific installed version of _Ue_:
+>`UePrjCreator.exe "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"`
+3. Generate single exe game, without *Engine.dll/%yourProjectName%Engine.dll, for certain installed _Ue_ version:
+>`UePrjCreator.exe "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --DevTpl`
 
 More options:
 Settings for *\%yourProjectName%\Config\DefaultEngine.ini section [/Script/HardwareTargeting.HardwareTargetingSettings]
