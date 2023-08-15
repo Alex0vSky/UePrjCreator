@@ -70,9 +70,9 @@ Building the project and tests from the source code requires the presence of the
 Can ask questions. PRs are accepted. No requirements for contributing.
 
 ## Thanks
-+ Inspired by video https://www.youtube.com/watch?v=94FvzO1HVzY of youtube blogger __Alex Forsythe__ (https://github.com/awforsythe,http://awforsythe.com).
-+ _morrisfranken/argparse_
-+ _Neargye/magic_enum_
++ Inspired by video [Unreal Engine C++ Project Setup, From Scratch](https://www.youtube.com/watch?v=94FvzO1HVzY) of youtube blogger __Alex Forsythe__ ([GitHubUser](https://github.com/awforsythe), [More](http://awforsythe.com)).
++ [morrisfranken/argparse](https://github.com/morrisfranken/argparse)
++ [Neargye/magic_enum](https://github.com/Neargye/magic_enum)
 
 ## License
 See the [LICENSE](https://github.com/Alex0vSky/UePrjCreator/blob/main/LICENSE) file for license rights and limitations (MIT).
