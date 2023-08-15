@@ -92,16 +92,28 @@ jobs:
         run: | 
           $strVersionCpplint=(pip show cpplint |findstr Version) -replace 'Version: ',''
           $arrFilter = @(
-            'whitespace/tab',
-            'whitespace/end_of_line',
-            'whitespace/parens',
-            'readability/namespace',
-            'whitespace/comments'
+              'whitespace/tab'
+            , 'whitespace/end_of_line'
+            , 'whitespace/parens'
+            , 'readability/namespace'
+            , 'whitespace/comments'
+            
+            , 'build/include_what_you_use'
+            , 'runtime/references'
           );
-          $filter = '-' + ( $arrFilter -join ',-' );
-          $linelength=120
-          $cpplint_args="--linelength=$linelength --filter=$filter --exclude=src\MsvcGenerated\* --exclude=src\Legacy\* --recursive --output=junit src";
-          Start-Process -Wait -NoNewWindow cpplint -ArgumentList $cpplint_args -RedirectStandardError ${{ runner.temp }}\cpplint.xml
+          $filter = '--filter=-' + ( $arrFilter -join ',-' );
+          
+          $exclude = '';
+          $arrExclude = @(
+             ( "${{ github.workspace }}" + '\src\_pch\' )
+           , ( "${{ github.workspace }}" + '\src\_fromBatch\' )
+          );
+          $exclude = '--exclude=' + ( $arrExclude -join ' --exclude=' );
+          
+          $linelength=100;
+          $cpplint_args="--linelength=$linelength $filter $exclude --recursive --output=junit ${{ github.workspace }}\src";
+          cpplint $cpplint_args 2>&1 | %{ "$_" } >${{ runner.temp }}\cpplint.xml
+          
           [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\cpplint.xml
           $cpplint_failures = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'testsuite' ).GetAttribute( 'failures' );
           $child = $oSystem_Xml_XmlDocument.CreateElement( 'Arguments' )
