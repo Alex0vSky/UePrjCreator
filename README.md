@@ -5,7 +5,10 @@ https://en.wikipedia.org/wiki/Microsoft_Windows
 https://en.wikipedia.org/wiki/C++
 )
 
-[![Qa test and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml/badge.svg)](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml)
+[![Qa test and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml/badge.svg)](
+https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml
+)
+
 [![cpplint](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/GoogleStyle_cpplint.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/cpplint.xml
 ) [![cppcheck](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/StaticAnalysis_cppcheck.svg)](
@@ -20,11 +23,10 @@ https://Alex0vSky.github.io/project-qa-report/UePrjCreator/GoogleTestCombinedOut
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/HtmlReportOcc/index.html
 )
 
-Tool for generate __Unreal Engine__ *.uproject files and directory structure with required C++ classes from command line by template.
-The resulting directory containing the *.uproject file is ready to be embedded into an executable via UnrealEngine UBT.
-The tool contains a template for building an executable file without creating *Editor.dll library.
+Tool for create __Unreal Engine__ *.uproject file and directory structure from command line. It completely repeats the behavior of UnrealEngine when creating a new project through the "Project Explorer" without a long full load of the engine.
 
 ## Features
+The resulting directory containing the *.uproject file is ready to be built into an executable via UnrealEngine UBT. Can use UnrealEngine templates. If template have C++ classes will be generated IDE project file. The tool contains a inner template for building an executable file without creating *Editor.dll library.
 
 ## Requirements
 Requires installed Unreal Engine version 4.
