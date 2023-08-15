@@ -23,30 +23,30 @@ https://Alex0vSky.github.io/project-qa-report/UePrjCreator/GoogleTestCombinedOut
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/HtmlReportOcc/index.html
 )
 
-Tool for create __Unreal Engine__ *.uproject file and directory structure from command line. It completely repeats the behavior of UnrealEngine when creating a new project through the "Project Explorer" without a long full load of the engine.
+Tool for create __Unreal Engine__ _*.uproject_ file and directory structure from command line. It completely repeats the behavior of UnrealEngine when creating a new project through the "Project Explorer" without a long full load of the engine.
 ## Features
-The resulting directory containing the *.uproject file is ready to be built into an executable via UnrealEngine UBT. Can use UnrealEngine templates. If template have C++ classes will be generated IDE project file. The tool contains a inner template for building an executable file without creating *Editor.dll library.
+The resulting directory containing the _*.uproject_ file is ready to be built into an executable via UnrealEngine UBT. Can use UnrealEngine templates. If template have C++ classes will be generated IDE project file. The tool contains a inner template for building an executable file without building _*Editor.dll_ library.
 ## Requirements
 Requires installed Unreal Engine version 4.
 ## Install
 The tool consists of one file. Does not require installation. 
 ## Usage
-For example desired full file name for *.uproject location will be `C:\UePrj1\UePrj1.uproject`
+For example, the desired fully qualified filename for the _*.uproject_ location would be `C:\UePrj1\UePrj1.uproject`
 <br/><sub>For the term _UnrealEngine_, the abbreviation _Ue_ will be used below.</sub>
-1. Generate a standart blank project
-   - Easy start for the latest version of the installed _Ue_:
-   >`UePrjCreator "C:\UePrj1\UePrj1.uproject"`
-   - Run for a specific installed version of the _Ue_:
-   >`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26`
-   - Run for installed _Ue_ in certain path in quotes:
-   >`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"`
-2. Generate from an existing template with a quoted path for a specific installed version of _Ue_:
-   >`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"`
-3. Generate for a game with one executable, without *Engine.dll, for a specific installed version of _Ue_:
-   >`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --DevTpl`
+* Generate a standart blank project
+  - Easy start for the latest version of the installed _Ue_:
+  <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject"`
+  - Run for a specific installed version of the _Ue_:
+  <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26`
+  - Run for installed _Ue_ in certain path in quotes:
+  <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"`
+* Generate from an existing template with a quoted path for a specific installed version of _Ue_:
+  <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"`
+* Generate for a game with one executable, without _*Engine.dll_, for a specific installed version of _Ue_:
+  <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --DevTpl`
 
 More options:
-- Settings for *\%yourProjectName%\Config\DefaultEngine.ini section [/Script/HardwareTargeting.HardwareTargetingSettings]
+- Settings for _*\%yourProjectName%\Config\DefaultEngine.ini_ section [/Script/HardwareTargeting.HardwareTargetingSettings]
 > ```
 > --TargetedHardwareClass=<value> [Unspecified, Maximum, Scalable>, default: Scalable]
 > --DefaultGraphicsPerformance=<value> [Unspecified, Desktop, Mobile>, default: Desktop]
