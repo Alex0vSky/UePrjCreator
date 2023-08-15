@@ -33,23 +33,23 @@ Requires installed Unreal Engine version 4.
 The tool consists of one file. Does not require installation. 
 
 ## Usage
-For the term UnrealEngine, the abbreviation Ue will be used below.
+For the term _UnrealEngine_, the abbreviation _Ue_ will be used below.
 
 First set desired full file name for *.uproject location
 set ffnUprj=C:\Prj\Ue\FromUePrjCreator\FromUePrjCreator.uproject
 
 Generate standart blank project
-Simple run for higher/major installed Ue version
+Simple run for higher/major installed _Ue_ version
 UePrjCreator.exe %ffnUprj%
-Run for certain installed Ue version
+Run for certain installed _Ue_ version
 UePrjCreator.exe %ffnUprj% --UeVersion=4.26
-Run for installed Ue in certain path in quotes
+Run for installed _Ue_ in certain path in quotes
 UePrjCreator.exe %ffnUprj% --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"
 
-Generate single exe game, without *Engine.dll/%yourProjectName%Engine.dll, for certain installed Ue version
+Generate single exe game, without *Engine.dll/%yourProjectName%Engine.dll, for certain installed _Ue_ version
 UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --DevTpl
 
-Generate from exists template by path in quotes, for certain installed Ue version
+Generate from exists template by path in quotes, for certain installed _Ue_ version
 UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"
 
 More options:
@@ -70,10 +70,9 @@ Building the project and tests from the source code requires the presence of the
 Can ask questions. PRs are accepted. No requirements for contributing.
 
 ## Thanks
-Inspired by youtube blogger
-
-_morrisfranken/argparse_
-_Neargye/magic_enum_
++ Inspired by video https://www.youtube.com/watch?v=94FvzO1HVzY of youtube blogger __Alex Forsythe__ (https://github.com/awforsythe,http://awforsythe.com).
++ _morrisfranken/argparse_
++ _Neargye/magic_enum_
 
 ## License
 See the [LICENSE](https://github.com/Alex0vSky/UePrjCreator/blob/main/LICENSE) file for license rights and limitations (MIT).
