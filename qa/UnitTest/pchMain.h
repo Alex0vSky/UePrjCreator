@@ -1,6 +1,6 @@
 // pchMain.h
 #pragma once
-#include "..\..\src\_fromBatch\_pch\stdafx.h"
+#include "..\..\src\_pch\_fromBatch\stdafx.h"
 
 #include "gtest\gtest.h"
 
