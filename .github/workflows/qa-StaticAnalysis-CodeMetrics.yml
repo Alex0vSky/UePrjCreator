@@ -113,10 +113,10 @@ jobs:
           $exclude;
           
           $linelength=100;
-          $cpplint_args="--linelength=$linelength $filter $exclude --recursive --output=junit ${{ github.workspace }}\src";
-          # cpplint $cpplint_args 2>&1 | %{ "$_" } >${{ runner.temp }}\cpplint.xml
-          
+          $cpplint_args="--linelength=$linelength $filter $exclude --recursive --output=junit ${{ github.workspace }}\src";          
           $cpplint_args;
+          
+          # cpplint $cpplint_args 2>&1 | %{ "$_" } >${{ runner.temp }}\cpplint.xml
           Start-Process -Wait -NoNewWindow cpplint -ArgumentList $cpplint_args -RedirectStandardError ${{ runner.temp }}\cpplint.xml
           
           [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\cpplint.xml
@@ -182,18 +182,19 @@ jobs:
         id: RunToolCppcheck
         continue-on-error: true
         run: | 
-          $common = ' --std=c++17 --platform=win32A --library=microsoft_sal --library=windows --enable=all -q --xml ';
+          $common = ' --language=c++ --std=c++17 --platform=win64 --library=microsoft_sal --library=windows --enable=all --force --inline-suppr -q --xml ';
           $include = '';
-          $include += ' -I "resource"'
-          $include += ' -I "src"'
-          $include += ' -I "ThirdParty\SynCOMAPIv1_0\Include"'
-          $defines  = ''
-          $defines += ' -DDECLSPEC_IMPORT=__declspec(import)'
-          $defines += ' -D_X86_=1'
-          $defines += ' -D_M_HYBRID_X86_ARM64=1'
-          $suppress = ' --suppress=missingIncludeSystem --suppress=missingInclude:*\SynCtrl.h --suppress=preprocessorErrorDirective:*\SynCtrl.h'
-          $cppcheck_exe = "${{env.dirSetupCppcheck}}\cppcheck.exe"
-          $cppcheck_args = $common + $include + $defines + $suppress + ' ' + 'src';
+          $include += " -I ""${{ github.workspace }}\src\_pch\_fromBatch"""
+          $include += " -I ""${{ github.workspace }}\src\_pch"""
+          # $include += " -I ""${{ github.workspace }}\ThirdParty"""
+          $include += " -I ""${{ github.workspace }}\src"""
+          
+          $defines = ' -DA0S_cppcheck__';
+          
+          $suppress = " --suppress=missingInclude:${{ github.workspace }}\src\_pch\argparse.h --suppress=missingInclude:${{ github.workspace }}\src\_pch\_fromBatch\stdafx.h --suppress=unusedFunction:${{ github.workspace }}\src\Main.h:22 --suppress=missingIncludeSystem --suppress=unmatchedSuppression";
+          
+          $cppcheck_exe = "${{ env.dirSetupCppcheck }}\cppcheck.exe"
+          $cppcheck_args = $common + $include + $defines + $suppress + ' ' + "${{ github.workspace }}\src";
           Start-Process -Wait -NoNewWindow $cppcheck_exe -ArgumentList $cppcheck_args -RedirectStandardError ${{ runner.temp }}\cppcheck.xml
           
           [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\cppcheck.xml
