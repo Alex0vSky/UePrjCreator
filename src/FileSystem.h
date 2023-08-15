@@ -5,10 +5,10 @@ struct FileSystem;
 namespace detail_ {
 class Dir {
 	std::filesystem::path m_Directory;
-	Dir(const std::filesystem::path &Directory) : m_Directory( Directory ) 
-	{}
+	explicit Dir(const std::filesystem::path &Directory) : m_Directory( Directory ) 
+    {}
 	friend struct FileSystem;
-public:
+ public:
 	std::filesystem::path getDirectoryPath() const {
 		return m_Directory;
 	}
@@ -32,7 +32,7 @@ struct FileSystem {
 		std::filesystem::path TemporaryDirectoryBase = 
 			std::filesystem::temp_directory_path( ) / "A0S_UePrjCreator_DevTpl";
 		std::string str( "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" );
-		std::mt19937 generator{ std::random_device{ }( ) };
+		std::mt19937 generator { std::random_device { }( ) };
 		for ( int i = 0; i < 10; ++i ) {
 			std::shuffle( str.begin( ), str.end( ), generator );
 			TemporaryDirectory = TemporaryDirectoryBase / str.substr( 0, 7 );

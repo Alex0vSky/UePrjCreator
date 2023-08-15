@@ -3,16 +3,16 @@
 namespace prj_3d { namespace UePrjCreator {
 class FOutputDeviceStdOutput : public FOutputDevice {
 	ELogTimes::Type *m_pPrintLogTimes;
-public:
+ public:
 	explicit FOutputDeviceStdOutput(ELogTimes::Type *pPrintLogTimes) 
 		: m_pPrintLogTimes( pPrintLogTimes )
-	{}
+    {}
 
-	virtual bool CanBeUsedOnAnyThread() const override {
+	bool CanBeUsedOnAnyThread() const override {
 		return true;
 	}
 
-	virtual void Serialize( 
+	void Serialize( 
 		const TCHAR* V
 		, ELogVerbosity::Type Verbosity
 		, const class FName& Category 

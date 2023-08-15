@@ -37,6 +37,9 @@
     <Filter Include="_pch\_fromBatch">
       <UniqueIdentifier>{7fabe2db-2bdb-4d04-84c9-a74946897687}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_pch\_haveUeSources">
+      <UniqueIdentifier>{ff56e890-25ee-4374-9fdf-ac4cca5a0cd1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource\resource.h">
@@ -117,9 +120,6 @@
     <ClInclude Include="..\..\..\..\..\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h">
       <Filter>_ForIntelliSense\sysw</Filter>
     </ClInclude>
-    <ClInclude Include="src\_pch\stdafx.h">
-      <Filter>_pch</Filter>
-    </ClInclude>
     <ClInclude Include="src\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -165,11 +165,14 @@
     <ClInclude Include="src\_pch\sysw.h">
       <Filter>_pch</Filter>
     </ClInclude>
-    <ClInclude Include="src\_fromBatch\_pch\stdafx.h">
-      <Filter>_pch\_fromBatch</Filter>
-    </ClInclude>
     <ClInclude Include="src\_pch\argparse.h">
       <Filter>_pch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_pch\_fromBatch\stdafx.h">
+      <Filter>_pch\_fromBatch</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_pch\_haveUeSources\stdafx.h">
+      <Filter>_pch\_haveUeSources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

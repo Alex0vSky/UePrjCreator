@@ -3,7 +3,7 @@
 namespace prj_3d { namespace UePrjCreator {
 namespace detail_ {
 class BaseReg {
-protected:
+ protected:
 	static const REGSAM m_Desired = KEY_READ;
 	static const DWORD m_Options = REG_OPTION_NON_VOLATILE; // default
 	const HKEY m_hKey;
@@ -14,7 +14,7 @@ protected:
 	} m_buf;
 	explicit BaseReg(HKEY hKey) : m_hKey( hKey ), m_buf{}
     {}
-public:
+ public:
 	BaseReg &operator = (const BaseReg &) = delete;
 };
 } // namespace detail_
@@ -49,7 +49,7 @@ class Reg : public detail_::BaseReg {
 		friend class Reg;
 	};
 
-public:
+ public:
 	bool readString(const wchar_t *ValueName, std::wstring &ValueValue) const { 
 		DWORD Type = REG_SZ;
 		DWORD cbData = m_buf.c_Bytes;

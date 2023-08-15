@@ -61,8 +61,9 @@ static int run(int argc, wchar_t *argv[]) {
 
 	// Need for delayload-ing UnrealEngine dlls
 	if ( !::SetCurrentDirectoryW( UeInstallDir.c_str( ) ) ) { 
-		int gle = (int)GetLastError( );
-		UPC_LOG( L"Error! Cant set directory\n  [%s]\n  GetLastError() = %d", UeInstallDir.c_str( ), gle );
+		int gle = static_cast<int>( GetLastError( ) );
+		UPC_LOG( L"Error! Cant set directory\n  [%s]\n  GetLastError() = %d"
+			, UeInstallDir.c_str( ), gle );
 		return gle;
 	}
 

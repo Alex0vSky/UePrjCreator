@@ -57,7 +57,7 @@
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>.;src;resource; C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine;C:\Ue\Engine\Source\Runtime\Engine\Public;C:\Ue\Engine\Source\Editor\EditorSubsystem\Public;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameProjectGeneration;C:\Ue\Engine\Source;C:\Ue\Engine\Source\Editor\AddContentDialog\Public;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AddContentDialog;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore;C:\Ue\Engine\Source\Runtime\SlateCore\Public;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InputCore;C:\Ue\Engine\Source\Runtime\InputCore\Classes;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HardwareTargeting;C:\Ue\Engine\Source\Runtime\Core\Public;C:\Ue\Engine\Source\Runtime\ApplicationCore\Public;C:\Ue\Engine\Source\Editor\HardwareTargeting\Public;C:\Ue\Engine\Source\Runtime\Json\Public;C:\Ue\Engine\Source\Runtime\Projects\Public;C:\Ue\Engine\Source\Runtime\CoreUObject\Public;C:\Ue\Engine\Source\Runtime\Slate\Public;C:\Ue\Engine\Source\Runtime\TraceLog\Public;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\_pch\_haveUeSources;src\_pch;src;resource;.;  C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine;C:\Ue\Engine\Source\Runtime\Engine\Public;C:\Ue\Engine\Source\Editor\EditorSubsystem\Public;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameProjectGeneration;C:\Ue\Engine\Source;C:\Ue\Engine\Source\Editor\AddContentDialog\Public;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AddContentDialog;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore;C:\Ue\Engine\Source\Runtime\SlateCore\Public;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InputCore;C:\Ue\Engine\Source\Runtime\InputCore\Classes;C:\Ue\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HardwareTargeting;C:\Ue\Engine\Source\Runtime\Core\Public;C:\Ue\Engine\Source\Runtime\ApplicationCore\Public;C:\Ue\Engine\Source\Editor\HardwareTargeting\Public;C:\Ue\Engine\Source\Runtime\Json\Public;C:\Ue\Engine\Source\Runtime\Projects\Public;C:\Ue\Engine\Source\Runtime\CoreUObject\Public;C:\Ue\Engine\Source\Runtime\Slate\Public;C:\Ue\Engine\Source\Runtime\TraceLog\Public;</AdditionalIncludeDirectories>
       <SupportJustMyCode>false</SupportJustMyCode>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
       <DisableSpecificWarnings>
@@ -65,7 +65,6 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeaderFile>_pch\stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EntryPointSymbol>
@@ -97,7 +96,7 @@ lib\UE4Editor-Slate.lib
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.;src\_fromBatch;src;resource;  include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem;include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine;include\Engine\Source\Runtime\Engine\Public;include\Engine\Source\Editor\EditorSubsystem\Public; include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameProjectGeneration;include\Engine\Source;include\Engine\Source\Editor\AddContentDialog\Public; include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AddContentDialog; include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore;include\Engine\Source\Runtime\SlateCore\Public;include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InputCore;include\Engine\Source\Runtime\InputCore\Classes;  include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HardwareTargeting;include\Engine\Source\Runtime\Core\Public;include\Engine\Source\Runtime\ApplicationCore\Public;include\Engine\Source\Editor\HardwareTargeting\Public;include\Engine\Source\Runtime\Json\Public;include\Engine\Source\Runtime\Projects\Public;include\Engine\Source\Runtime\CoreUObject\Public;include\Engine\Source\Runtime\Slate\Public;include\Engine\Source\Runtime\TraceLog\Public;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src\_pch\_fromBatch;src\_pch;src;resource;.;  include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\EditorSubsystem;include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine;include\Engine\Source\Runtime\Engine\Public;include\Engine\Source\Editor\EditorSubsystem\Public; include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\GameProjectGeneration;include\Engine\Source;include\Engine\Source\Editor\AddContentDialog\Public; include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\AddContentDialog; include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\SlateCore;include\Engine\Source\Runtime\SlateCore\Public;include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\InputCore;include\Engine\Source\Runtime\InputCore\Classes;  include\Engine\Intermediate\Build\Win64\UE4Editor\Inc\HardwareTargeting;include\Engine\Source\Runtime\Core\Public;include\Engine\Source\Runtime\ApplicationCore\Public;include\Engine\Source\Editor\HardwareTargeting\Public;include\Engine\Source\Runtime\Json\Public;include\Engine\Source\Runtime\Projects\Public;include\Engine\Source\Runtime\CoreUObject\Public;include\Engine\Source\Runtime\Slate\Public;include\Engine\Source\Runtime\TraceLog\Public;</AdditionalIncludeDirectories>
       <Optimization>MinSpace</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
@@ -109,7 +108,6 @@ lib\UE4Editor-Slate.lib
       <CompileAsManaged>false</CompileAsManaged>
       <CompileAsWinRT>false</CompileAsWinRT>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>_pch\stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -176,10 +174,10 @@ lib\UE4Editor-Slate.lib
     <ClInclude Include="src\StringConvert.h" />
     <ClInclude Include="src\UeLocator.h" />
     <ClInclude Include="src\Version.h" />
-    <ClInclude Include="src\_fromBatch\_pch\stdafx.h" />
     <ClInclude Include="src\_pch\argparse.h" />
-    <ClInclude Include="src\_pch\stdafx.h" />
     <ClInclude Include="src\_pch\sysw.h" />
+    <ClInclude Include="src\_pch\_fromBatch\stdafx.h" />
+    <ClInclude Include="src\_pch\_haveUeSources\stdafx.h" />
     <ClInclude Include="ThirdParty\argparse.hpp" />
     <ClInclude Include="ThirdParty\magic_enum.hpp" />
   </ItemGroup>
@@ -224,11 +222,9 @@ lib\UE4Editor-Slate.lib
     </ClCompile>
     <ClCompile Include="src\EntryPoint.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_pch\stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\_pch\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">_pch\stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>

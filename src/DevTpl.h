@@ -5,7 +5,7 @@ class DevTpl {
 	std::filesystem::path m_TemporaryDirectory;
 	std::wstring m_UProjectFullFilename;
 	DevTpl() = default;
-	void write_(detail_::Dir &RootDir, const std::string &UProjectFullFilename) {
+	void write_(const detail_::Dir &RootDir, const std::string &UProjectFullFilename) {
 		RootDir.createFileAndWrite( UProjectFullFilename.c_str( ), R"A0S_DELIM(
 {
 	"FileVersion": 3,
@@ -192,7 +192,7 @@ SortKey="_1"
 			)A0S_DELIM" );
 	}
 
-public:
+ public:
 	static DevTpl &Get() {
 		static DevTpl DevTpl;
 		return DevTpl;

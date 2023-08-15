@@ -1,5 +1,5 @@
 // Copyright 2023 Alex0vSky (https://github.com/Alex0vSky)
-#include "_pch\stdafx.h"
+#include "stdafx.h" // NOLINT(build/include_subdir)
 #include "Main.h"
 
 // Global variables for logging

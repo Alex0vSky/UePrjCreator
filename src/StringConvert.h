@@ -8,8 +8,8 @@ struct StringConvert {
 		std::vector< std::string > m_stringStorage;
 	public:
 		ArgvChar(int argc, wchar_t *argv[]) 
-			: m_argvPtrs( std::make_unique< const char **>( new const char *[ argc ] ) )
-		{
+			: m_argvPtrs( std::make_unique< const char **>( new const char *[ argc ] ) 
+		) {
 			m_argv = *m_argvPtrs;
 			for ( int i = 0; i < argc; ++i ) {
 				m_stringStorage.push_back( StringConvert::wcsrtombs( argv[ i ] ) );
@@ -17,7 +17,7 @@ struct StringConvert {
 			}
 		}
 		int argc() {
-			return (int)m_stringStorage.size( );
+			return static_cast<int>( m_stringStorage.size( ) );
 		}
 		auto argv() {
 			return m_argv;
@@ -28,7 +28,7 @@ struct StringConvert {
 		return sz;
 	}
 
-	// TODO: do it like template
+	// TODO(Alex0vSky): do it like template
 	static std::string wcsrtombs(const std::wstring &wcstr) {
 		static bool bLocale = false;
 		if ( !bLocale ) {

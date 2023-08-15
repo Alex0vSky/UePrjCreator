@@ -6,7 +6,7 @@ struct GetAddressBySymbol {
 		HMODULE m_h;
 	public:
 		explicit ScopedFree(HMODULE h) : m_h( h )
-		{}
+        {}
 		~ScopedFree()
 		{ if ( m_h ) ::FreeLibrary( m_h ); }
 	};

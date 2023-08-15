@@ -1,4 +1,4 @@
-// src\Version.h - versioning, use PE-file resources via UePrjCreator.rc, file will be patñhed in CI
+// src\Version.h - versioning, use PE-file resources via UePrjCreator.rc, file will be patched in CI
 #pragma once // Copyright 2023 Alex0vSky (https://github.com/Alex0vSky)
 #define A0S_Copyright \
 	"Copyright 2023 Alex0vSky (https://github.com/Alex0vSky)"

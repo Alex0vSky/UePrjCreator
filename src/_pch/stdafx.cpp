@@ -1,4 +1,5 @@
-#include "_pch\stdafx.h"
+// Copyright 2023 Alex0vSky (https://github.com/Alex0vSky)
+#include "stdafx.h"
 
 // Posted here to speed up compilation
 namespace prj_3d { namespace UePrjCreator {

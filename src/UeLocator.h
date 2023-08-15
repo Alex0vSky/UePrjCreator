@@ -12,10 +12,10 @@ struct UeLocator {
 			for (auto &var : container) {
 				std::wstring InstalledDirectory;
 				if ( var.second.readString( 
-					Constants::getUnrealEngineRegistryValueName( )
-					, InstalledDirectory 
-				) ) 
-				{
+						Constants::getUnrealEngineRegistryValueName( )
+						, InstalledDirectory 
+					)
+				) {
 					VerToPath[ var.first ] = InstalledDirectory;
 				}
 			}
@@ -42,8 +42,7 @@ struct UeLocator {
 				return ERROR_BAD_ARGUMENTS;
 			}
 			UeInstallDir = VerToPath[ UeVersion.c_str( ) ];
-		}
-		else {
+		} else {
 			UPC_TRACE( L"Try load a higher version of Unreal Engine: [%s]"
 				, VerToPath.rbegin( ) ->first.c_str( ) );
 			UeInstallDir = VerToPath.rbegin( ) ->second;
@@ -51,6 +50,5 @@ struct UeLocator {
 		UPC_TRACE( L"  [%s]", UeInstallDir.c_str( ) );
 		return ERROR_SUCCESS;
 	}
-
 };
 }} // namespace prj_3d::UePrjCreator

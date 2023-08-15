@@ -4,9 +4,9 @@ namespace prj_3d { namespace UePrjCreator {
 class CmdLiner {
 	StringConvert::ArgvChar m_ArgvChar;
 
-public:
+ public:
 	CmdLiner(int argc, wchar_t *argv[]) : m_ArgvChar( argc, argv )
-	{}
+    {}
 
 	bool parse(
 		  std::wstring &Filename
@@ -39,8 +39,7 @@ public:
 				exit( ERROR_SUCCESS );
 			}
 			Filename = StringConvert::mbsrtowcs( *parsed.arg_0Uproject );
-		}
-		else {
+		} else {
 			std::cout << 
 				R"(Argument missing: arg_0 (quoted path to Unreal Engine installation directory e.g.: "C:\MyGame\MyGame.uproject")\n)";
 			return false;

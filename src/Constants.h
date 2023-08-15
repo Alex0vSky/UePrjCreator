@@ -2,7 +2,6 @@
 #pragma once // Copyright 2023 Alex0vSky (https://github.com/Alex0vSky)
 namespace prj_3d { namespace UePrjCreator {
 struct Constants {
-
 static auto getVersion() {
 	static const auto value = ( 
 "UePrjCreator version " A0S_STRING_VERSION "\n"
@@ -43,6 +42,5 @@ LR"(InstalledDirectory)"
 		);
 	return value;
 }
-
 };
 }} // namespace prj_3d::UePrjCreator
