@@ -1,8 +1,11 @@
 # _UePrjCreator_
-[![cpp-logo](https://img.shields.io/badge/C++v17-Solutions-blue.svg?style=flat&logo=c%2B%2B)](
+[![windows-os](https://img.shields.io/badge/platform-windows-blue?logo=Windows)](
+https://en.wikipedia.org/wiki/Microsoft_Windows
+) [![cpp-logo](https://img.shields.io/badge/C%2B%2B-v17-blue?logo=cplusplus)](
 https://en.wikipedia.org/wiki/C++
-) [![Qa test and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml/badge.svg)](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml)
+)
 
+[![Qa test and coverage](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml/badge.svg)](https://github.com/Alex0vSky/UePrjCreator/actions/workflows/qa-UnitTest-Coverage.yml)
 [![cpplint](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/GoogleStyle_cpplint.svg)](
 https://Alex0vSky.github.io/project-qa-report/UePrjCreator/cpplint.xml
 ) [![cppcheck](https://gist.githubusercontent.com/Alex0vSky/c200bc8d7e3cc3a79b61351963b2d390/raw/StaticAnalysis_cppcheck.svg)](
