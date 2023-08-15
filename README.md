@@ -38,26 +38,34 @@ The tool consists of one file. Does not require installation.
 For the term _UnrealEngine_, the abbreviation _Ue_ will be used below.
 
 First set desired full file name for *.uproject location
-set ffnUprj=C:\Prj\Ue\FromUePrjCreator\FromUePrjCreator.uproject
+> `set ffnUprj=C:\Prj\Ue\FromUePrjCreator\FromUePrjCreator.uproject`
 
-Generate standart blank project
+Generate a standart blank project
 Simple run for higher/major installed _Ue_ version
-UePrjCreator.exe %ffnUprj%
+>`UePrjCreator.exe %ffnUprj%`
+
 Run for certain installed _Ue_ version
-UePrjCreator.exe %ffnUprj% --UeVersion=4.26
+
+`UePrjCreator.exe %ffnUprj% --UeVersion=4.26`
+
 Run for installed _Ue_ in certain path in quotes
-UePrjCreator.exe %ffnUprj% --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"
+
+`UePrjCreator.exe %ffnUprj% --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"`
 
 Generate single exe game, without *Engine.dll/%yourProjectName%Engine.dll, for certain installed _Ue_ version
-UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --DevTpl
+
+`UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --DevTpl`
 
 Generate from exists template by path in quotes, for certain installed _Ue_ version
-UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"
+
+`UePrjCreator.exe %ffnUprj% --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"`
 
 More options:
 Settings for *\%yourProjectName%\Config\DefaultEngine.ini section [/Script/HardwareTargeting.HardwareTargetingSettings]
---TargetedHardwareClass=<value>
---DefaultGraphicsPerformance=<value>
+> ```
+> --TargetedHardwareClass=<value> [Unspecified, Maximum, Scalable>, default: Scalable]
+> --DefaultGraphicsPerformance=<value> [Unspecified, Desktop, Mobile>, default: Desktop]
+> ```
 
 ## Tests
 ### CI github actions
