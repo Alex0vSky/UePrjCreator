@@ -6,7 +6,7 @@ class DevTpl {
 	std::wstring m_UProjectFullFilename;
 	DevTpl() = default;
 	void write_(const detail_::Dir &RootDir, const std::string &UProjectFullFilename) {
-		RootDir.createFileAndWrite( UProjectFullFilename.c_str( ), R"A0S_DELIM(
+		RootDir.createFileAndWrite( UProjectFullFilename, R"A0S_DELIM(
 {
 	"FileVersion": 3,
 	"EngineAssociation": "",
@@ -208,7 +208,8 @@ SortKey="_1"
 	bool CreateTemplateInTemporaryDirectory() {
 		removeTemporaryDirectories( );
 		std::atexit( removeTemporaryDirectories );
-		std::at_quick_exit( removeTemporaryDirectories );
+		if ( !std::at_quick_exit( removeTemporaryDirectories ) )
+			UPC_TRACE( "Cant remove temporary directories on terminate" );
 		try {
 			detail_::Dir RootDir = FileSystem::createTemporaryRootDirectory( m_TemporaryDirectory );
 			std::string UProjectFullFilename = "TP_devTpl.uproject";

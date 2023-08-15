@@ -1,9 +1,9 @@
 #pragma once
-#include "ThirdParty\magic_enum.hpp"
+#include "magic_enum.hpp"
 #pragma warning( push )
 #pragma warning( disable: 4244 )
 #pragma warning( disable: 4101 )
-#include "ThirdParty\argparse.hpp"
+#include "argparse.hpp"
 #pragma warning( pop )
 
 // Posted here to speed up compilation

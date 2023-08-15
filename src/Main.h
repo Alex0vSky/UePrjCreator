@@ -99,15 +99,16 @@ static int run(int argc, wchar_t *argv[]) {
 
 	FConfigCacheIni::InitializeConfigSystem( );
 	// Take from delayload to load and pre-init static UObject-s
-	::LoadLibraryA( "UE4Editor-GameProjectGeneration.dll" ); // leak
+	if ( !::LoadLibraryA( "UE4Editor-GameProjectGeneration.dll" ) )  // leak
+		UPC_LOG( "Fail load UE4Editor-CoreUObject.dll" );
 	// Prepare initializer UObject-s
 	if ( !FModuleManager::Get( ).LoadModule( L"CoreUObject" ) )
-		UPC_LOG( "Fail load and startup UE4Editor-CoreUObject.dll" );
+		UPC_LOG( "Fail startup CoreUObject" );
 	// Init loaded UObject-s. Fill indepth ThreadHash for use UObject-s
 	pOnInit ->Broadcast( );
 	// Prepare Unreal Engine project generator in GameProjectUtils
 	if ( !FModuleManager::Get( ).LoadModule( L"GameProjectGeneration" ) )
-		UPC_LOG( "Fail load and startup UE4Editor-GameProjectGeneration.dll" );
+		UPC_LOG( "Fail startup GameProjectGeneration" );
 
 	// Init static StaticEnum<EHardwareClass::Type> for GameProjectUtils
 	CreatePackage( L"/Script/HardwareTargeting" );
@@ -142,7 +143,7 @@ static int run(int argc, wchar_t *argv[]) {
 		Info.TemplateFile = TemplateFullFilename.c_str( );
 		const FString SrcFolder = FPaths::GetPath( Info.TemplateFile );
 		// leak
-		UTemplateProjectDefs* TemplateDefs = GameProjectUtils::LoadTemplateDefs( SrcFolder );
+		const UTemplateProjectDefs* TemplateDefs = GameProjectUtils::LoadTemplateDefs( SrcFolder );
 		if ( TemplateDefs ) {
 			Info.bIsEnterpriseProject = TemplateDefs ->bIsEnterprise;
 			Info.bIsBlankTemplate = TemplateDefs ->bIsBlank;

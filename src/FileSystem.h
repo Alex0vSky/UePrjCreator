@@ -16,7 +16,7 @@ class Dir {
 		std::ofstream file( m_Directory / Filename, std::ios::binary );
 		if ( !file.is_open( ) )
 			return false;
-		file << Content.c_str( );
+		file << Content;
 		return file.good( );
 	}
 	Dir createSubDirectory(const std::filesystem::path &DirectoryName) const {
