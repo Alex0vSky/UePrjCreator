@@ -102,6 +102,7 @@ jobs:
             , 'runtime/references'
           );
           $filter = '--filter=-' + ( $arrFilter -join ',-' );
+          $filter;
           
           $exclude = '';
           $arrExclude = @(
@@ -109,10 +110,14 @@ jobs:
            , ( "${{ github.workspace }}" + '\src\_fromBatch\' )
           );
           $exclude = '--exclude=' + ( $arrExclude -join ' --exclude=' );
+          $exclude;
           
           $linelength=100;
           $cpplint_args="--linelength=$linelength $filter $exclude --recursive --output=junit ${{ github.workspace }}\src";
-          cpplint $cpplint_args 2>&1 | %{ "$_" } >${{ runner.temp }}\cpplint.xml
+          # cpplint $cpplint_args 2>&1 | %{ "$_" } >${{ runner.temp }}\cpplint.xml
+          
+          $cpplint_args;
+          Start-Process -Wait -NoNewWindow cpplint -ArgumentList $cpplint_args -RedirectStandardError ${{ runner.temp }}\cpplint.xml
           
           [xml]$oSystem_Xml_XmlDocument = Get-Content ${{ runner.temp }}\cpplint.xml
           $cpplint_failures = $oSystem_Xml_XmlDocument.GetElementsByTagName( 'testsuite' ).GetAttribute( 'failures' );
