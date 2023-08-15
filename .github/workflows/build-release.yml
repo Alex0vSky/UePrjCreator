@@ -1,5 +1,5 @@
 name: Build and creating release
-on: { workflow_dispatch, push: { paths-ignore: [ '**', '!src/**', '!.github/workflows/build-release.yml' ] } }
+on: { workflow_dispatch, push: { paths-ignore: [ '**', '!*.vcxproj', '!src/**', '!.github/workflows/build-release.yml' ] } }
 # Configuration
 env:
   strExe: UePrjCreator
