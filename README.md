@@ -27,7 +27,8 @@ https://Alex0vSky.github.io/project-qa-report/UePrjCreator/HtmlReportOcc/index.h
 
 Tool for create __Unreal Engine__ _*.uproject_ file and directory structure from command line. It completely repeats the behavior of UnrealEngine when creating a new project through the "Project Explorer" without a long full load of the engine.
 ## Features
-The resulting directory containing the _*.uproject_ file is ready to be built into an executable via UnrealEngine UBT. Can use UnrealEngine templates. If template have C++ classes will be generated IDE project file. The tool contains a inner template for building an executable file without building _*Editor.dll_ library. Under the hood, the tool loads the Unreal core, performs minimal initialization, and calls the core functionality.
+The resulting directory containing the _*.uproject_ file is ready to be built into an executable via UnrealEngine UBT. Can use UnrealEngine templates. If template have C++ classes will be generated IDE project file. The tool contains a inner template for building an executable file without building _*Editor.dll_ library.
+<br/><sub>Under the hood, the tool loads the Unreal core, performs minimal initialization, and calls the core functionality.</sub>
 ## Requirements
 Requires installed Unreal Engine version 4.
 ## Install
