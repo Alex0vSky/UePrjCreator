@@ -69,5 +69,6 @@ Can ask questions. PRs are accepted. No requirements for contributing.
 + Inspired by video [Unreal Engine C++ Project Setup, From Scratch](https://www.youtube.com/watch?v=94FvzO1HVzY) of youtube blogger __Alex Forsythe__ ([GitHubUser](https://github.com/awforsythe), [More](http://awforsythe.com)).
 + [morrisfranken/argparse](https://github.com/morrisfranken/argparse)
 + [Neargye/magic_enum](https://github.com/Neargye/magic_enum)
++ googletest+googlemock [google/googletest](https://github.com/google/googletest)
 ## License
 See the [LICENSE](https://github.com/Alex0vSky/UePrjCreator/blob/main/LICENSE) file for license rights and limitations (MIT).
