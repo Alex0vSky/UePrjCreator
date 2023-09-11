@@ -73,4 +73,4 @@ Can ask questions. PRs are accepted. No requirements for contributing.
 + vs_google_test_explorer_namespace.h [Macro to Enable Namespaces in Google Test Adapter for Visual Studio](https://bitbucket.org/CadActive/workspace/snippets/GrBakB/macro-to-enable-namespaces-in-google-test) by James Sullivan ([More](https://developercommunity.visualstudio.com/t/test-explorer-namespace-seems-to-not-be-working/663974))
 ## License
 See the [LICENSE](https://github.com/Alex0vSky/UePrjCreator/blob/main/LICENSE) file for license rights and limitations (MIT).
-<meta name="google-site-verification" content="BVcmC8NZcaK5Lr8yGbYnlZ2R4vb1gQKKW1dPGvr03xA" />
+BVcmC8NZcaK5Lr8yGbYnlZ2R4vb1gQKKW1dPGvr03xA
