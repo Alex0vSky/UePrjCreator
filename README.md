@@ -46,7 +46,7 @@ For example, the desired fully qualified filename for the _*.uproject_ location 
   - Run for installed _Ue_ in certain path in quotes:
   <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeInstallDir="C:\Program Files\Epic Games\UE_4.26"`
 * Generate from an existing template with a quoted path for a specific installed version of _Ue_:
-  <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller"`
+  <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --Tpl="C:\Program Files\Epic Games\UE_4.26\Templates\TP_SideScroller\TP_SideScroller.uproject"`
 * Generate for a game with one executable, without _*Engine.dll_, for a specific installed version of _Ue_:
   <br/>`UePrjCreator "C:\UePrj1\UePrj1.uproject" --UeVersion=4.26 --DevTpl`
 
