@@ -36,6 +36,8 @@ Requires installed Unreal Engine version 4.
 ## Install
 The tool consists of one file. Does not require installation. 
 ## Usage
+*Animated command line and responses https://alex0vsky.github.io/posts/UePrjCreator*
+
 For example, the desired fully qualified filename for the _*.uproject_ location would be `C:\UePrj1\UePrj1.uproject`
 <br/><sub>For the term _UnrealEngine_, the abbreviation _Ue_ will be used below.</sub>
 * Generate a standart blank project
