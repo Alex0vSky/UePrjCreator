@@ -70,12 +70,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Alex0vSky github"
             VALUE "FileDescription", "Create *.uproject file for Unreal Engine from command line"
-            VALUE "ProductVersion", A0S_STRING_VERSION
             VALUE "FileVersion", A0S_STRING_VERSION
             VALUE "InternalName", "UePrjCreator.exe"
-            VALUE "LegalCopyright", ""
+            VALUE "LegalCopyright", "" // MIT license
             VALUE "OriginalFilename", "UePrjCreator.exe"
             VALUE "ProductName", "Unreal Engine uproject file creator"
+            VALUE "ProductVersion", A0S_STRING_VERSION
         END
     END
     BLOCK "VarFileInfo"

@@ -30,21 +30,21 @@ namespace detail_ {
 												= kwarg(
 			"UeInstallDir"
 , "quoted path to Unreal Engine installation directory"
-" e.g.: \"C:\\Program Files\\Epic Games\\UE_4.26\"\n\t\t\t\t"
+"\n\t\t\t\t e.g.: \"C:\\Program Files\\Epic Games\\UE_4.26\"\n\t\t\t\t"
 );
 
 		EGraphicsPreset::Type
 			&arg_DefaultGraphicsPerformance
 												= kwarg(
 			"DefaultGraphicsPerformance"
-, "like DefaultEngine.ini [/Script/HardwareTargeting.HardwareTargetingSettings]\n\t\t\t\t"
+, "from DefaultEngine.ini [/Script/HardwareTargeting.HardwareTargetingSettings]\n\t\t\t\t"
 ).set_default( "Scalable" );
 
 		EHardwareClass::Type
 			&arg_TargetedHardwareClass
 												= kwarg(
 			"TargetedHardwareClass"
-, "like DefaultEngine.ini [/Script/HardwareTargeting.HardwareTargetingSettings]\n\t\t\t\t"
+, "from DefaultEngine.ini [/Script/HardwareTargeting.HardwareTargetingSettings]\n\t\t\t\t"
 ).set_default( "Desktop" );
 
 		std::optional< std::string >
@@ -65,7 +65,7 @@ namespace detail_ {
 
 		bool &arg_bDevTpl						= flag(
 			"DevTpl"
-, "generate special uproject for single *.exe game, without UeEditor-s dll"
+, "generate special uproject for single *.exe game, without UeEditor-s dll\n\t\t\t\t"
 ).set_default( false );
 
 		bool &arg_bShouldGenerateCode			= flag(
@@ -74,7 +74,7 @@ namespace detail_ {
 ).set_default( true );
 		bool &arg_bIsBlankTemplate				= flag(
 			"Blank"
-, "blank templates do not specify a default map (affect only DevTpl)"
+, "blank templates do not specify a default map (affect only DevTpl)\n\t\t\t\t"
 ).set_default( false );
 
 		bool &arg_version						= flag(
