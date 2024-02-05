@@ -3,14 +3,14 @@
 namespace prj_3d { namespace UePrjCreator {
 struct StringConvert {
 	class ArgvChar { 
-		std::unique_ptr< const char ** > m_argvPtrs;
+		std::unique_ptr< const char *[] > m_argvPtrs;
 		const char **m_argv;
 		std::vector< std::string > m_stringStorage;
 	public:
 		ArgvChar(int argc, wchar_t *argv[]) 
-			: m_argvPtrs( std::make_unique< const char **>( new const char *[ argc ] ) 
+			: m_argvPtrs( std::make_unique< const char *[]>( new const char *[ argc ] ) 
 		) {
-			m_argv = *m_argvPtrs;
+			m_argv = static_cast< const char ** >( m_argvPtrs.get( ) );
 			for ( int i = 0; i < argc; ++i ) {
 				m_stringStorage.push_back( StringConvert::wcsrtombs( argv[ i ] ) );
 				m_argv[ i ] = m_stringStorage.back( ).c_str( );
