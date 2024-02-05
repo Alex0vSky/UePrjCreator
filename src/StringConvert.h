@@ -7,8 +7,8 @@ struct StringConvert {
 		const char **m_argv;
 		std::vector< std::string > m_stringStorage;
 	public:
-		ArgvChar(int argc, wchar_t *argv[]) 
-			: m_argvPtrs( std::make_unique< const char *[]>( new const char *[ argc ] ) 
+		ArgvChar(int argc, wchar_t *argv[]) :
+			m_argvPtrs( std::make_unique< const char *[]>( argc )
 		) {
 			m_argv = static_cast< const char ** >( m_argvPtrs.get( ) );
 			for ( int i = 0; i < argc; ++i ) {
