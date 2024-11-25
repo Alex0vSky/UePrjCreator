@@ -19,7 +19,7 @@ jobs:
   test-and-coverage:
     runs-on: windows-latest
     permissions:
-      actions: read # for "dawidd6/action-download-artifact@v2"
+      actions: read # for "dawidd6/action-download-artifact@v6"
       contents: read # for "actions/checkout@v3" when GITHUB_TOKEN
     steps:
       - uses: actions/checkout@v3
@@ -31,7 +31,7 @@ jobs:
           echo "dirSetupOcc=${env:Programfiles}\Occ" >> $env:GITHUB_ENV
 
       - name: Download artifact
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v6
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           workflow: build-test.yml
